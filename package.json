@@ -1,6 +1,6 @@
 {
-  "name": "pure-admin-thin",
-  "version": "5.8.0",
+  "name": "shljy-demo",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,7 +22,6 @@
     "preinstall": "npx only-allow pnpm"
   },
   "keywords": [
-    "pure-admin-thin",
     "vue-pure-admin",
     "element-plus",
     "tailwindcss",
@@ -33,19 +32,10 @@
     "vite",
     "esm"
   ],
-  "homepage": "https://github.com/pure-admin/pure-admin-thin",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pure-admin/pure-admin-thin.git"
-  },
-  "bugs": {
-    "url": "https://github.com/pure-admin/vue-pure-admin/issues"
-  },
+  "homepage": "https://674facb6c7938e00086e59c4--shljy1.netlify.app/#/login",
   "license": "MIT",
   "author": {
-    "name": "xiaoxian521",
-    "email": "pureadmin@163.com",
-    "url": "https://github.com/xiaoxian521"
+    "name": "shljy"
   },
   "dependencies": {
     "@pureadmin/descriptions": "^1.2.1",
