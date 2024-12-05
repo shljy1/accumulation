@@ -58,7 +58,7 @@ const echartsRouter = {
   path: "/echarts",
   meta: {
     title: "图表",
-    icon: "ri:coin-line",
+    icon: "ep:pie-chart",
     rank: 10
   },
   children: [
