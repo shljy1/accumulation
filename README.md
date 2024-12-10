@@ -1,2 +1,2 @@
-# myStore
-自己写的一些demo
+# accumulation
+留下一点痕迹
