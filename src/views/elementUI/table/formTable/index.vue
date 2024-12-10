@@ -115,11 +115,17 @@
 
 <script setup lang="ts">
 import { useTableConfig } from "./useConfig";
-import { ElMessageBox } from "element-plus";
 import type { FormInstance } from "element-plus";
-import { ref, nextTick } from "vue";
-import { message } from "@/utils/message";
-const { tableColumns, options, model, onAddItem } = useTableConfig();
+import { ref } from "vue";
+const {
+  tableColumns,
+  options,
+  model,
+  onAddItem,
+  handleDetele,
+  handleChange,
+  onSubmit
+} = useTableConfig();
 defineOptions({
   name: "formTablePage"
 });
@@ -127,75 +133,9 @@ const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 const tableFormRef = ref<FormInstance>();
 
-const handleDetele = async (index: number) => {
-  let con = await ElMessageBox.confirm(" 是否删除该记录？", {
-    confirmButtonText: "确认",
-    cancelButtonText: "取消",
-    type: "warning"
-  }).catch(() => {});
-  if (!con) return;
-  model.tableData[index] = {
-    fruits: "",
-    hobby: "",
-    animals: [],
-    showline: false,
-    image: {
-      img: []
-    },
-    is_main: false
-  };
-  await nextTick();
-  model.tableData.map(i => {
-    if (i.image.img.length !== 0 && i.showline) {
-      let blob = new Blob([i.image.img[0].raw], {
-        type: i.image.img[0].raw.type
-      });
-      URL.revokeObjectURL(i.image.img[0].url);
-      let blobURL = URL.createObjectURL(blob);
-      i.image.img[0].url = blobURL;
-    }
-  });
-};
-
 const tableRowClassName = row => {
   if (!row.row.showline) {
     return "hidden";
-  }
-};
-
-const onSubmit = async tableFormEls => {
-  let tableValid = true;
-  await tableFormEls.validate((valid, field) => {
-    let deleteRow = [];
-    model.tableData.map((i, n) => {
-      if (!i.showline) {
-        deleteRow.push(n.toString());
-      }
-    });
-    if (field) {
-      Object.keys(field).map(i => {
-        let row = i.slice(10, 11).toString();
-        if (deleteRow.indexOf(row) == -1) {
-          tableValid = false;
-        }
-      });
-    }
-    valid = tableValid; //为通过语法检验而写，可以删
-  });
-  if (!tableValid) return;
-
-  if (model.tableData.filter(i => i.showline).length == 0) {
-    message("请至少添加一条商品规格", { type: "error" });
-  }
-};
-
-const handleChange = (value, row) => {
-  if (value) {
-    model.tableData.forEach(i => {
-      i.is_main = false;
-      return i;
-    });
-    row.is_main = value;
   }
 };
 
@@ -238,8 +178,6 @@ const handlePictureCardPreview = uploadFile => {
     }
 
     .tableForm {
-      height: 85% !important;
-
       :deep(.el-select) {
         width: 100% !important;
       }
