@@ -93,7 +93,7 @@ function build(row = 20, a) {
   a.appendChild(root);
 
   let len = body.length;
-  let delay = r(50, 100);
+  let delay = r(20, 100);
   loop(() => {
     body = [];
     let { offset, size } = options;

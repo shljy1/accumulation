@@ -121,7 +121,7 @@ const canvasRouter = {
   path: "/canvas",
   meta: {
     title: "画布",
-    icon: "ep:data-board",
+    icon: "ep:operation",
     rank: 30
   },
   children: [
