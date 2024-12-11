@@ -1,9 +1,7 @@
-<script setup lang="ts">
-defineOptions({
-  name: "Welcome"
-});
-</script>
-
 <template>
-  <h1>shljy</h1>
+  <div>shljy</div>
 </template>
+
+<script setup></script>
+
+<style scoped></style>

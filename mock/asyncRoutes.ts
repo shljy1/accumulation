@@ -86,7 +86,7 @@ const elementUIRouter = {
   meta: {
     title: "组件",
     icon: "ep:data-board",
-    rank: 10
+    rank: 20
   },
   children: [
     {
@@ -117,6 +117,25 @@ const elementUIRouter = {
   ]
 };
 
+const canvasRouter = {
+  path: "/canvas",
+  meta: {
+    title: "画布",
+    icon: "ep:data-board",
+    rank: 30
+  },
+  children: [
+    {
+      path: "/canvas/fontRain/index",
+      name: "fontRainPage",
+      meta: {
+        title: "文字雨",
+        roles: ["admin", "common"]
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -124,7 +143,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [echartsRouter, elementUIRouter]
+        data: [echartsRouter, elementUIRouter, canvasRouter]
       };
     }
   }

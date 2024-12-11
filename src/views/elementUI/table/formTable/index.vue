@@ -48,6 +48,19 @@
               />
             </el-form-item>
           </template>
+          <template #money="scope">
+            <el-form-item
+              :prop="'tableData.' + scope.$index + '.money'"
+              :rules="model.rules.money"
+            >
+              <el-input
+                v-model="scope.row.money"
+                placeholder="请输入"
+                oninput="value=value.replace(/[^\d.]/g,'')"
+                clearable
+              />
+            </el-form-item>
+          </template>
           <template #animals="scope">
             <el-form-item
               :prop="'tableData.' + scope.$index + '.animals'"

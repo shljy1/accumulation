@@ -2,10 +2,20 @@ import { reactive, nextTick } from "vue";
 import { ElMessageBox } from "element-plus";
 import { message } from "@/utils/message";
 export function useTableConfig() {
+  const validateNumber = (rule: any, value: any, callback: any) => {
+    if (value === "") {
+      callback(new Error("必填项"));
+    } else if (isNaN(value)) {
+      callback(new Error("请输入正确的数值"));
+    } else {
+      callback();
+    }
+  };
   const model = reactive({
     rules: {
       fruits: [{ required: true, message: "必填项", trigger: "change" }],
       hobby: [{ required: true, message: "必填项", trigger: "change" }],
+      money: [{ validator: validateNumber, required: true, trigger: "change" }],
       animals: [{ required: true, message: "必填项", trigger: "change" }]
     },
 
@@ -13,6 +23,7 @@ export function useTableConfig() {
       {
         fruits: "",
         hobby: "",
+        money: "",
         animals: [],
         showline: true,
         image: {
@@ -45,6 +56,10 @@ export function useTableConfig() {
       slot: "hobby"
     },
     {
+      label: "金钱",
+      slot: "money"
+    },
+    {
       label: "动物",
       slot: "animals"
     },
@@ -64,6 +79,7 @@ export function useTableConfig() {
     model.tableData.push({
       fruits: "",
       hobby: "",
+      money: "",
       animals: [],
       showline: true,
       image: {
@@ -83,6 +99,7 @@ export function useTableConfig() {
     model.tableData[index] = {
       fruits: "",
       hobby: "",
+      money: "",
       animals: [],
       showline: false,
       image: {
