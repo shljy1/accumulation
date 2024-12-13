@@ -159,6 +159,14 @@ const styleRouter = {
         title: "图片悬停",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/style/cardRotate/index",
+      name: "cardRotatePage",
+      meta: {
+        title: "卡片翻转",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
