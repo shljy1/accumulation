@@ -136,6 +136,33 @@ const canvasRouter = {
   ]
 };
 
+const styleRouter = {
+  path: "/style",
+  meta: {
+    title: "样式",
+    icon: "ri:exchange-2-line",
+    rank: 30
+  },
+  children: [
+    {
+      path: "/style/rotate/index",
+      name: "rotatePage",
+      meta: {
+        title: "3D旋转",
+        roles: ["admin", "common"]
+      }
+    },
+    {
+      path: "/style/hover/index",
+      name: "hoverPage",
+      meta: {
+        title: "图片悬停",
+        roles: ["admin", "common"]
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -143,7 +170,7 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [echartsRouter, elementUIRouter, canvasRouter]
+        data: [echartsRouter, elementUIRouter, canvasRouter, styleRouter]
       };
     }
   }

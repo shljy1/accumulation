@@ -12,7 +12,6 @@
 .welcome-body {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100vh;
   background: url(/src/assets/welcome/sakura.jpg);
   background-size: cover;
@@ -21,12 +20,12 @@
 
 .frosted-glass {
   position: fixed;
-  top: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 72vw;
-  height: 36vh;
+  height: 24vh;
+  margin-top: 10vh;
   box-shadow:
     0 0.3px 0.7px rgba(0, 0, 0, 0.126),
     0 0.9px 1.7px rgba(0, 0, 0, 0.179),

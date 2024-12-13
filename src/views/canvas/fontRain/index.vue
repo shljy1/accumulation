@@ -29,6 +29,16 @@ function pick() {
   return arguments[r(0, arguments.length - 1)];
 }
 function getChar() {
+  let num = Math.random();
+  if (num > 0.9995) {
+    return "锦";
+  }
+  if (num < 0.0005) {
+    return "瑟";
+  }
+  // if (0.4995 < num && num < 0.5005) {
+  //   return "";
+  // }
   return String.fromCharCode(
     pick(r(0x3041, 0x30ff), r(0x2000, 0x206f), r(0x0020, 0x003f))
   );
@@ -105,7 +115,7 @@ function build(row = 20, a) {
 
     traverse((c, i, last) => {
       c.style = `
-        color: hsl(136, 100%, ${(85 / len) * (i + 1)}%);
+        color: hsl(${(i * 12) % 255}, 100%, ${(85 / len) * (i + 1)}%);
         display: block;
         width: 38px ;
         height: 24px ;
@@ -116,7 +126,7 @@ function build(row = 20, a) {
       if (last) {
         c.textContent = getChar();
         c.style = `
-          color: hsl(136, 100%, 85%);
+          color: hsl(245, 100%, 85%);
           text-shadow:
             0 0 .5em #fff,
             0 0 .5em currentColor;
