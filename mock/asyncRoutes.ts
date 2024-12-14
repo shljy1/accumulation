@@ -167,6 +167,14 @@ const styleRouter = {
         title: "卡片翻转",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/style/drawerPhoto/index",
+      name: "drawerPhotoPage",
+      meta: {
+        title: "抽屉相册",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };

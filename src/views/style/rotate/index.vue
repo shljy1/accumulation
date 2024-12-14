@@ -3,13 +3,13 @@
     <div class="rotate-container">
       <div class="card-box">
         <div class="card">
-          <img src="@/assets/welcome/sakura.jpg" alt="" />
+          <img src="@/assets/img/1.jpg" alt="" />
         </div>
         <div class="card">
-          <img src="@/assets/welcome/sakura.jpg" alt="" />
+          <img src="@/assets/img/2.jpg" alt="" />
         </div>
         <div class="card">
-          <img src="@/assets/welcome/sakura.jpg" alt="" />
+          <img src="@/assets/img/3.jpg" alt="" />
         </div>
       </div>
     </div>
@@ -27,8 +27,8 @@
   overflow: hidden;
   background-color: #000;
   .rotate-container {
-    width: 300px;
-    height: 170px;
+    width: 200px;
+    height: 300px;
     perspective: 1000px;
     position: relative;
     .card-box {
