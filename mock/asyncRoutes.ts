@@ -175,6 +175,14 @@ const styleRouter = {
         title: "抽屉相册",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/style/solidPhoto/index",
+      name: "solidPhotoPage",
+      meta: {
+        title: "立体相册",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
