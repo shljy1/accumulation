@@ -132,6 +132,14 @@ const canvasRouter = {
         title: "文字雨",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/canvas/verify/index",
+      name: "verifyPage",
+      meta: {
+        title: "验证码",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
