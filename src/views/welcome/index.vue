@@ -24,7 +24,7 @@
   justify-content: center;
   align-items: center;
   width: 72vw;
-  height: 24vh;
+  height: 20vh;
   margin-top: 10vh;
   box-shadow:
     0 0.3px 0.7px rgba(0, 0, 0, 0.126),

@@ -244,8 +244,8 @@ const debouncedChartResize = debounce(chartResize, 200, false);
 </script>
 <style lang="scss" scoped>
 .myPictorialBar {
-  width: 50%;
-  height: 50%;
+  width: 800px;
+  height: 500px;
   box-sizing: border-box;
 }
 </style>

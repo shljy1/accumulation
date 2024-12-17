@@ -210,4 +210,7 @@ const transitionMain = defineComponent({
 .main-content {
   margin: 24px;
 }
+.grow {
+  overflow-x: auto;
+}
 </style>
