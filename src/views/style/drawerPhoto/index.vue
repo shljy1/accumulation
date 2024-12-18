@@ -5,13 +5,22 @@
         <img src="@/assets/img/1.jpg" alt="" />
       </div>
       <div class="box-img">
-        <img src="@/assets/img/2.jpg" alt="" />
-      </div>
-      <div class="box-img">
-        <img src="@/assets/img/3.jpg" alt="" />
+        <img src="@/assets/img/1.jpg" alt="" />
       </div>
       <div class="box-img">
         <img src="@/assets/img/1.jpg" alt="" />
+      </div>
+      <div class="box-img">
+        <img src="@/assets/img/1.jpg" alt="" />
+      </div>
+      <div class="box-img">
+        <img src="@/assets/img/2.jpg" alt="" />
+      </div>
+      <div class="box-img">
+        <img src="@/assets/img/2.jpg" alt="" />
+      </div>
+      <div class="box-img">
+        <img src="@/assets/img/2.jpg" alt="" />
       </div>
       <div class="box-img">
         <img src="@/assets/img/2.jpg" alt="" />
@@ -57,24 +66,33 @@
       object-position: left;
     }
     .box-img:nth-child(2) img {
-      object-position: 20% 50%;
+      object-position: 33% 50%;
     }
     .box-img:nth-child(3) img {
-      object-position: 40% 50%;
+      object-position: 67% 50%;
     }
     .box-img:nth-child(4) img {
-      object-position: 60% 50%;
+      object-position: 100% 50%;
     }
     .box-img:nth-child(5) img {
-      object-position: 80% 50%;
+      object-position: left;
     }
-    .box-img:nth-child(6) {
+    .box-img:nth-child(6) img {
+      object-position: 33% 50%;
+    }
+    .box-img:nth-child(7) img {
+      object-position: 67% 50%;
+    }
+    .box-img:nth-child(8) img {
+      object-position: 100% 50%;
+    }
+    .box-img:nth-child(9) {
       width: 200px;
     }
-    .box-img:hover ~ .box-img:nth-child(6) {
+    .box-img:hover ~ .box-img:nth-child(9) {
       width: 50px;
     }
-    .box-img:hover ~ .box-img:nth-child(6) img {
+    .box-img:hover ~ .box-img:nth-child(9) img {
       object-position: right;
     }
   }

@@ -1,7 +1,16 @@
 <template>
   <div class="rotate-body">
     <div class="rotate-container">
-      <div class="card-box">
+      <div class="card-box-in">
+        <div class="card">
+          <img src="@/assets/img/1.jpg" alt="" />
+        </div>
+        <div class="card">
+          <img src="@/assets/img/2.jpg" alt="" />
+        </div>
+        <div class="card">
+          <img src="@/assets/img/3.jpg" alt="" />
+        </div>
         <div class="card">
           <img src="@/assets/img/1.jpg" alt="" />
         </div>
@@ -12,6 +21,17 @@
           <img src="@/assets/img/3.jpg" alt="" />
         </div>
       </div>
+      <!-- <div class="card-box">
+        <div class="card">
+          <img src="@/assets/img/1.jpg" alt="" />
+        </div>
+        <div class="card">
+          <img src="@/assets/img/2.jpg" alt="" />
+        </div>
+        <div class="card">
+          <img src="@/assets/img/3.jpg" alt="" />
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -20,7 +40,7 @@
 <style lang="scss" scoped>
 .rotate-body {
   height: 500px;
-  width: 900px;
+  width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,13 +51,65 @@
     height: 300px;
     perspective: 1000px;
     position: relative;
-    .card-box {
+    // .card-box {
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 100%;
+    //   transform-style: preserve-3d;
+    //   transform: rotateY(0) translateZ(-500px);
+    //   animation: cardRotate 15s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+    //   .card img {
+    //     width: 100%;
+    //     height: 100%;
+    //   }
+    //   .card {
+    //     position: absolute;
+    //     left: 0;
+    //     right: 0;
+    //     top: 0;
+    //     bottom: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     -webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 50%, rgba(255, 255, 255, 0.3));
+    //   }
+
+    //   .card:nth-child(1) {
+    //     transform: rotateY(0) translateZ(500px);
+    //   }
+
+    //   .card:nth-child(2) {
+    //     transform: rotateY(120deg) translateZ(500px);
+    //   }
+
+    //   .card:nth-child(3) {
+    //     transform: rotateY(240deg) translateZ(500px);
+    //   }
+
+    //   @keyframes cardRotate {
+    //     4% {
+    //       transform: translateZ(-500px) rotateY(0);
+    //     }
+    //     36% {
+    //       transform: translateZ(-500px) rotateY(-120deg);
+    //     }
+    //     68% {
+    //       transform: translateZ(-500px) rotateY(-240deg);
+    //     }
+    //     100% {
+    //       transform: translateZ(-500px) rotateY(-360deg);
+    //     }
+    //   }
+    // }
+    .card-box-in {
       position: absolute;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      transform: rotateY(0) translateZ(-700px);
-      animation: cardRotate 15s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+      transform: rotateY(0) translateZ(-500px);
+      animation: cardRotateIn 30s cubic-bezier(0.77, 0, 0.175, 1) infinite;
       .card img {
         width: 100%;
         height: 100%;
@@ -48,8 +120,8 @@
         right: 0;
         top: 0;
         bottom: 0;
-        width: 120%;
-        height: 120%;
+        width: 100%;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -57,33 +129,50 @@
       }
 
       .card:nth-child(1) {
-        transform: rotateY(0) translateZ(700px);
+        transform: rotateY(0) translateZ(173px);
       }
 
       .card:nth-child(2) {
-        transform: rotateY(120deg) translateZ(700px);
+        transform: rotateY(60deg) translateZ(173px);
       }
 
       .card:nth-child(3) {
-        transform: rotateY(240deg) translateZ(700px);
+        transform: rotateY(120deg) translateZ(173px);
       }
 
-      @keyframes cardRotate {
-        0%,
-        10% {
-          transform: translateZ(-700px) rotateY(0);
+      .card:nth-child(4) {
+        transform: rotateY(180deg) translateZ(173px);
+      }
+
+      .card:nth-child(5) {
+        transform: rotateY(240deg) translateZ(173px);
+      }
+
+      .card:nth-child(6) {
+        transform: rotateY(300deg) translateZ(173px);
+      }
+
+      @keyframes cardRotateIn {
+        4% {
+          transform: translateZ(-500px) rotateY(0);
         }
-        20%,
-        40% {
-          transform: translateZ(-700px) rotateY(-120deg);
+        20% {
+          transform: translateZ(-500px) rotateY(60deg);
         }
-        50%,
-        70% {
-          transform: translateZ(-700px) rotateY(-240deg);
+        36% {
+          transform: translateZ(-500px) rotateY(120deg);
         }
-        80%,
+        52% {
+          transform: translateZ(-500px) rotateY(180deg);
+        }
+        68% {
+          transform: translateZ(-500px) rotateY(240deg);
+        }
+        84% {
+          transform: translateZ(-500px) rotateY(300deg);
+        }
         100% {
-          transform: translateZ(-700px) rotateY(-360deg);
+          transform: translateZ(-500px) rotateY(360deg);
         }
       }
     }
