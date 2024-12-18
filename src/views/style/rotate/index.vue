@@ -39,8 +39,8 @@
 <script setup lang="ts"></script>
 <style lang="scss" scoped>
 .rotate-body {
-  height: 500px;
-  width: 800px;
+  height: 400px;
+  width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;

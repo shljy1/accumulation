@@ -191,6 +191,14 @@ const styleRouter = {
         title: "立体相册",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/style/glassCard/index",
+      name: "glassCardPage",
+      meta: {
+        title: "玻璃卡片",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };

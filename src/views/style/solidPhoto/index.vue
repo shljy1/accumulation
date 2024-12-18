@@ -48,7 +48,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 800px;
+  width: 750px;
   height: 500px;
   background-color: #000;
   position: relative;

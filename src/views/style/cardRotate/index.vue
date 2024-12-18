@@ -19,8 +19,8 @@
 <script setup lang="ts"></script>
 <style lang="scss" scoped>
 .cardRotate-body {
-  height: 500px;
-  width: 900px;
+  height: 250px;
+  width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
