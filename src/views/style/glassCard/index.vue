@@ -14,7 +14,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "glassCardPage"
+});
+</script>
 <style lang="scss" scoped>
 .glassCard-body {
   width: 600px;

@@ -36,7 +36,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "rotatePage"
+});
+</script>
 <style lang="scss" scoped>
 .rotate-body {
   height: 400px;

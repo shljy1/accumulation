@@ -12,6 +12,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+defineOptions({
+  name: "verifyPage"
+});
 const domRef = ref<HTMLCanvasElement>();
 const width = ref<number>(120);
 const height = ref<number>(40);

@@ -44,7 +44,7 @@
     0 20px 30px rgba(0, 0, 0, 0.5);
 }
 .frosted-glass .title {
-  padding-left: 0.375em;
+  padding-left: 0.75em;
   font-size: 3.6em;
   font-family: Lato, sans-serif;
   font-weight: 200;

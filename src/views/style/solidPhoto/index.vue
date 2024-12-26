@@ -42,7 +42,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "solidPhotoPage"
+});
+</script>
 <style lang="scss" scoped>
 .solidPhoto-body {
   display: flex;

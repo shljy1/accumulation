@@ -6,6 +6,9 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
+defineOptions({
+  name: "fontRainPage"
+});
 onMounted(() => {
   const main = document.getElementById("rain");
   for (let i = 0; i < 20; ++i) {

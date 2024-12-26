@@ -32,7 +32,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "drawerPhotoPage"
+});
+</script>
 <style lang="scss" scoped>
 .drawerPhoto-body {
   width: 800px;

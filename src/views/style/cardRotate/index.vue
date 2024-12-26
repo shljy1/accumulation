@@ -16,7 +16,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "cardRotatePage"
+});
+</script>
 <style lang="scss" scoped>
 .cardRotate-body {
   height: 250px;

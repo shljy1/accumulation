@@ -14,7 +14,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: "hoverPage"
+});
+</script>
 <style lang="scss" scoped>
 .hover-body {
   position: relative;
