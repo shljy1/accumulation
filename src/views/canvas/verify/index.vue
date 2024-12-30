@@ -1,5 +1,5 @@
 <template>
-  <div class="verify-body">
+  <div class="w-[500px] h-[300px]">
     <canvas
       ref="domRef"
       width="120"
@@ -79,9 +79,3 @@ const draw = () => {
   }
 };
 </script>
-<style lang="scss" scoped>
-.verify-body {
-  width: 500px;
-  height: 300px;
-}
-</style>

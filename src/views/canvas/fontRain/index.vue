@@ -1,6 +1,6 @@
 <template>
-  <div class="font-rain">
-    <div id="rain" class="font-rain-canvas" />
+  <div class="h-120 w-[50rem] bg-black flex items-center">
+    <div id="rain" class="flex" />
   </div>
 </template>
 
@@ -141,16 +141,6 @@ function build(row = 20, a) {
 </script>
 
 <style scoped>
-.font-rain {
-  height: 480px;
-  width: 800px;
-  display: flex;
-  align-items: center;
-  background: #000;
-}
-.font-rain-canvas {
-  display: flex;
-}
 p {
   line-height: 1;
 }

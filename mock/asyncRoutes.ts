@@ -199,6 +199,14 @@ const styleRouter = {
         title: "玻璃卡片",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/style/loading/index",
+      name: "loadingPage",
+      meta: {
+        title: "加载动画",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };

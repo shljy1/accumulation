@@ -1,7 +1,7 @@
 <template>
-  <div class="welcome-body">
-    <div class="frosted-glass">
-      <h1 class="title">shljy</h1>
+  <div class="welcome-body flex justify-center bg-cover bg-center h-screen">
+    <div class="frosted-glass flex justify-center items-center fixed">
+      <h1 class="title pl-3 text-white">shljy</h1>
     </div>
   </div>
 </template>
@@ -10,19 +10,10 @@
 
 <style scoped>
 .welcome-body {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  background: url(/src/assets/welcome/sakura.jpg);
-  background-size: cover;
-  background-position: center;
+  background-image: url(/src/assets/welcome/sakura.jpg);
 }
 
 .frosted-glass {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 72vw;
   height: 20vh;
   margin-top: 10vh;
@@ -44,11 +35,9 @@
     0 20px 30px rgba(0, 0, 0, 0.5);
 }
 .frosted-glass .title {
-  padding-left: 0.75em;
   font-size: 3.6em;
   font-family: Lato, sans-serif;
   font-weight: 200;
   letter-spacing: 0.75em;
-  color: white;
 }
 </style>

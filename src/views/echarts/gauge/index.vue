@@ -1,5 +1,5 @@
 <template>
-  <div id="myGauge" class="myGauge" />
+  <div id="myGauge" class="w-[800px] h-[500px] box-border" />
 </template>
 
 <script lang="ts" setup>
@@ -242,10 +242,3 @@ const chartResize = () => {
 };
 const debouncedChartResize = debounce(chartResize, 200, false);
 </script>
-<style lang="scss" scoped>
-.myGauge {
-  width: 50%;
-  height: 50%;
-  box-sizing: border-box;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="myPictorialBar" class="myPictorialBar" />
+  <div id="myPictorialBar" class="w-[800px] h-[500px] box-border" />
 </template>
 
 <script lang="ts" setup>
@@ -242,10 +242,3 @@ const chartResize = () => {
 };
 const debouncedChartResize = debounce(chartResize, 200, false);
 </script>
-<style lang="scss" scoped>
-.myPictorialBar {
-  width: 800px;
-  height: 500px;
-  box-sizing: border-box;
-}
-</style>
