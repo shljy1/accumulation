@@ -140,6 +140,14 @@ const canvasRouter = {
         title: "验证码",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/canvas/countdown/index",
+      name: "countdownPage",
+      meta: {
+        title: "倒计时",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };

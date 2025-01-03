@@ -47,6 +47,7 @@ defineOptions({
       border-radius: 10px;
       margin: 0 -45px;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       transform: rotate(calc(var(--r) * 1deg));
       img {
         width: 100%;
