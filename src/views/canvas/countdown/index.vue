@@ -9,7 +9,7 @@
         class="absolute top-0 left-0 w-full h-full flex items-center justify-center"
       >
         <h3>
-          <span id="percent">60s</span>
+          <span>{{ percent }}</span>
         </h3>
       </div>
     </div>
@@ -22,16 +22,15 @@ defineOptions({
 });
 let timer;
 onMounted(() => {
-  let percent = 60;
-  const percentBox = document.querySelector("#percent")!;
+  let _percent = 60;
   const countDown = () => {
-    percent -= 1;
-    if (percent == 0) {
+    _percent -= 1;
+    if (_percent == 0) {
       clearInterval(timer);
       timer = 0;
     }
-    computedStyle.value = { strokeDashoffset: 440 - 440 * (percent / 60) };
-    percentBox.innerHTML = percent + "s";
+    computedStyle.value = { strokeDashoffset: 440 - 440 * (_percent / 60) };
+    percent.value = _percent + "s";
     return countDown;
   };
   timer = setInterval(countDown(), 1000);
@@ -42,6 +41,7 @@ onUnmounted(() => {
   }
 });
 const computedStyle = ref({ strokeDashoffset: 0 });
+const percent = ref("60s");
 </script>
 <style lang="scss" scoped>
 circle {

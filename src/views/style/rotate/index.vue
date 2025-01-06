@@ -129,7 +129,7 @@ defineOptions({
         display: flex;
         justify-content: center;
         align-items: center;
-        -webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 50%, rgba(255, 255, 255, 0.3));
+        -webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 50%, rgba(255, 255, 255, 0.3)); //安卓不兼容
       }
 
       .card:nth-child(1) {

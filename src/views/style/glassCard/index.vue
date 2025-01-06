@@ -46,7 +46,7 @@ defineOptions({
       transition: 0.5s;
       border-radius: 10px;
       margin: 0 -45px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); //安卓不兼容
       -webkit-backdrop-filter: blur(10px);
       transform: rotate(calc(var(--r) * 1deg));
       img {
