@@ -156,7 +156,7 @@ const styleRouter = {
   path: "/style",
   meta: {
     title: "样式",
-    icon: "ri:exchange-2-line",
+    icon: "ri:quill-pen-ai-line",
     rank: 30
   },
   children: [
@@ -219,6 +219,41 @@ const styleRouter = {
   ]
 };
 
+const threeRouter = {
+  path: "/three",
+  meta: {
+    title: "三维",
+    icon: "ri:exchange-2-line",
+    rank: 40
+  },
+  children: [
+    {
+      path: "/three/ugglyBunny/index",
+      name: "ugglyBunnyPage",
+      meta: {
+        title: "兔子动画",
+        roles: ["admin", "common"]
+      }
+    },
+    {
+      path: "/three/girl/index",
+      name: "girlPage",
+      meta: {
+        title: "模型加载",
+        roles: ["admin", "common"]
+      }
+    },
+    {
+      path: "/three/measurement/index",
+      name: "measurementPage",
+      meta: {
+        title: "模型测量",
+        roles: ["admin", "common"]
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -226,7 +261,13 @@ export default defineFakeRoute([
     response: () => {
       return {
         success: true,
-        data: [echartsRouter, elementUIRouter, canvasRouter, styleRouter]
+        data: [
+          echartsRouter,
+          elementUIRouter,
+          canvasRouter,
+          styleRouter,
+          threeRouter
+        ]
       };
     }
   }

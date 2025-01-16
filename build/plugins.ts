@@ -14,6 +14,7 @@ import removeConsole from "vite-plugin-remove-console";
 import { themePreprocessorPlugin } from "@pureadmin/theme";
 import { genScssMultipleScopeVars } from "../src/layout/theme";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
+import { templateCompilerOptions } from "@tresjs/core";
 
 export function getPluginsList(
   VITE_CDN: boolean,
@@ -21,7 +22,9 @@ export function getPluginsList(
 ): PluginOption[] {
   const lifecycle = process.env.npm_lifecycle_event;
   return [
-    vue(),
+    vue({
+      ...templateCompilerOptions
+    }),
     // jsx、tsx语法支持
     vueJsx(),
     checker({
