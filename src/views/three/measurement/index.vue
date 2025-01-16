@@ -6,7 +6,7 @@ import { ColladaLoader } from "three/addons/loaders/ColladaLoader.js";
 onMounted(() => {
   init();
   animate();
-  container = document.getElementById("sss");
+  container = document.getElementById("container");
   container.appendChild(renderer.domElement);
   container.addEventListener("mousemove", onDocumentMouseMove, false);
   //esc删除绘制
@@ -54,7 +54,7 @@ const init = () => {
   scene.add(axisHelper);
   const point = new THREE.PointLight(0xffffff, 400, 0, 1);
   point.position.set(300, 400, 300);
-  const ambient = new THREE.AmbientLight(0x444444);
+  const ambient = new THREE.AmbientLight(0x444444, 5);
   scene.add(ambient);
   scene.add(point);
   camera.position.set(150, 65, 150);
@@ -318,7 +318,7 @@ function onClick() {
       let text1 = document.createElement("span");
       text1.style.position = "absolute";
       text1.style.top = "0";
-      text1.style.color = "red";
+      text1.style.color = "#efdbff";
       text1.style.pointerEvents = "none";
       let text2 = text1.cloneNode();
       container.appendChild(text1);
@@ -345,7 +345,7 @@ function onClick() {
       let marker1 = new THREE.Mesh(
         new THREE.SphereGeometry(30, 10, 20),
         new THREE.MeshBasicMaterial({
-          color: 0xff5555
+          color: 0xefdbff
         })
       );
       let marker2 = marker1.clone();
@@ -358,7 +358,7 @@ function onClick() {
       let line = new THREE.LineSegments(
         geometry,
         new THREE.LineDashedMaterial({
-          color: 0xff5555,
+          color: 0xefdbff,
           transparent: true,
           depthTest: false
         })
@@ -408,7 +408,7 @@ function onClick() {
       line.oldMaterial = line.material;
       //虚线变实线
       line.material = new THREE.LineBasicMaterial({
-        color: 0xff5555,
+        color: 0xefdbff,
         transparent: true,
         depthTest: false
       });
@@ -455,7 +455,7 @@ function onClick() {
     let thicknessText = document.createElement("span");
     thicknessText.style.position = "absolute";
     thicknessText.style.top = "0";
-    thicknessText.style.color = "red";
+    thicknessText.style.color = "#efdbff";
     thicknessText.style.pointerEvents = "none";
 
     container.appendChild(point2d0);
@@ -530,7 +530,7 @@ function onClick() {
     let angleText = document.createElement("span");
     angleText.style.position = "absolute";
     angleText.style.top = "0";
-    angleText.style.color = "red";
+    angleText.style.color = "#efdbff";
     angleText.style.pointerEvents = "none";
     if (!drawingLine && pointId == 0) {
       //加入2d的点
@@ -657,7 +657,7 @@ function onClick() {
       let triangleLine = new THREE.Line(
         geometry,
         new THREE.LineBasicMaterial({
-          color: 0xff5555,
+          color: 0xefdbff,
           transparent: true
         })
       );
@@ -695,101 +695,126 @@ function onClick() {
       draggableRadiusPoint(listenPoint1, radiuslineId, 0);
       draggableRadiusPoint(listenPoint2, radiuslineId, 1);
       draggableRadiusPoint(listenPoint3, radiuslineId, 2);
-
+      addRingGeometry(
+        triangle,
+        points[0],
+        points[1],
+        points[2],
+        radiuslineId,
+        "add",
+        radius
+      );
       pointId = 0;
       radiuslineId++;
       drawingLine = false;
-      let x1 = points[0].x;
-      let y1 = points[0].y;
-      let z1 = points[0].z;
-
-      let x2 = points[1].x;
-      let y2 = points[1].y;
-      let z2 = points[1].z;
-
-      let x3 = points[2].x;
-      let y3 = points[2].y;
-      let z3 = points[2].z;
-
-      let a1 = y1 * z2 - y2 * z1 - y1 * z3 + y3 * z1 + y2 * z3 - y3 * z2;
-      let b1 = -(x1 * z2 - x2 * z1 - x1 * z3 + x3 * z1 + x2 * z3 - x3 * z2);
-      let c1 = x1 * y2 - x2 * y1 - x1 * y3 + x3 * y1 + x2 * y3 - x3 * y2;
-      let d1 = -(
-        x1 * y2 * z3 -
-        x1 * y3 * z2 -
-        x2 * y1 * z3 +
-        x2 * y3 * z1 +
-        x3 * y1 * z2 -
-        x3 * y2 * z1
-      );
-      let a2 = 2 * (x2 - x1);
-      let b2 = 2 * (y2 - y1);
-      let c2 = 2 * (z2 - z1);
-      let d2 = x1 * x1 + y1 * y1 + z1 * z1 - x2 * x2 - y2 * y2 - z2 * z2;
-      let a3 = 2 * (x3 - x1);
-      let b3 = 2 * (y3 - y1);
-      let c3 = 2 * (z3 - z1);
-      let d3 = x1 * x1 + y1 * y1 + z1 * z1 - x3 * x3 - y3 * y3 - z3 * z3;
-      let x =
-        -(
-          b1 * c2 * d3 -
-          b1 * c3 * d2 -
-          b2 * c1 * d3 +
-          b2 * c3 * d1 +
-          b3 * c1 * d2 -
-          b3 * c2 * d1
-        ) /
-        (a1 * b2 * c3 -
-          a1 * b3 * c2 -
-          a2 * b1 * c3 +
-          a2 * b3 * c1 +
-          a3 * b1 * c2 -
-          a3 * b2 * c1);
-      let y =
-        (a1 * c2 * d3 -
-          a1 * c3 * d2 -
-          a2 * c1 * d3 +
-          a2 * c3 * d1 +
-          a3 * c1 * d2 -
-          a3 * c2 * d1) /
-        (a1 * b2 * c3 -
-          a1 * b3 * c2 -
-          a2 * b1 * c3 +
-          a2 * b3 * c1 +
-          a3 * b1 * c2 -
-          a3 * b2 * c1);
-      let z =
-        -(
-          a1 * b2 * d3 -
-          a1 * b3 * d2 -
-          a2 * b1 * d3 +
-          a2 * b3 * d1 +
-          a3 * b1 * d2 -
-          a3 * b2 * d1
-        ) /
-        (a1 * b2 * c3 -
-          a1 * b3 * c2 -
-          a2 * b1 * c3 +
-          a2 * b3 * c1 +
-          a3 * b1 * c2 -
-          a3 * b2 * c1);
-      const v4 = new THREE.Vector3(0, 0, 0);
-      triangle.getNormal(v4);
-      const circleGeometry = new THREE.RingGeometry(radius, radius + 0.1, 32);
-      circleGeometry.lookAt(v4);
-      circleGeometry.translate(x, y, z);
-
-      // 创建材质
-      const material = new THREE.MeshBasicMaterial({
-        color: 0xff5555,
-        side: THREE.DoubleSide
-      });
-      // 创建圆并添加到场景
-      const circle1 = new THREE.Mesh(circleGeometry, material);
-      radiusRing.push(circle1);
-      scene.add(circle1);
       points = [];
     }
+  }
+}
+
+function addRingGeometry(
+  triangle,
+  point0,
+  point1,
+  point2,
+  radiuslineId,
+  type,
+  radius
+) {
+  let x1 = point0.x;
+  let y1 = point0.y;
+  let z1 = point0.z;
+
+  let x2 = point1.x;
+  let y2 = point1.y;
+  let z2 = point1.z;
+
+  let x3 = point2.x;
+  let y3 = point2.y;
+  let z3 = point2.z;
+
+  let a1 = y1 * z2 - y2 * z1 - y1 * z3 + y3 * z1 + y2 * z3 - y3 * z2;
+  let b1 = -(x1 * z2 - x2 * z1 - x1 * z3 + x3 * z1 + x2 * z3 - x3 * z2);
+  let c1 = x1 * y2 - x2 * y1 - x1 * y3 + x3 * y1 + x2 * y3 - x3 * y2;
+  let d1 = -(
+    x1 * y2 * z3 -
+    x1 * y3 * z2 -
+    x2 * y1 * z3 +
+    x2 * y3 * z1 +
+    x3 * y1 * z2 -
+    x3 * y2 * z1
+  );
+  let a2 = 2 * (x2 - x1);
+  let b2 = 2 * (y2 - y1);
+  let c2 = 2 * (z2 - z1);
+  let d2 = x1 * x1 + y1 * y1 + z1 * z1 - x2 * x2 - y2 * y2 - z2 * z2;
+  let a3 = 2 * (x3 - x1);
+  let b3 = 2 * (y3 - y1);
+  let c3 = 2 * (z3 - z1);
+  let d3 = x1 * x1 + y1 * y1 + z1 * z1 - x3 * x3 - y3 * y3 - z3 * z3;
+  let x =
+    -(
+      b1 * c2 * d3 -
+      b1 * c3 * d2 -
+      b2 * c1 * d3 +
+      b2 * c3 * d1 +
+      b3 * c1 * d2 -
+      b3 * c2 * d1
+    ) /
+    (a1 * b2 * c3 -
+      a1 * b3 * c2 -
+      a2 * b1 * c3 +
+      a2 * b3 * c1 +
+      a3 * b1 * c2 -
+      a3 * b2 * c1);
+  let y =
+    (a1 * c2 * d3 -
+      a1 * c3 * d2 -
+      a2 * c1 * d3 +
+      a2 * c3 * d1 +
+      a3 * c1 * d2 -
+      a3 * c2 * d1) /
+    (a1 * b2 * c3 -
+      a1 * b3 * c2 -
+      a2 * b1 * c3 +
+      a2 * b3 * c1 +
+      a3 * b1 * c2 -
+      a3 * b2 * c1);
+  let z =
+    -(
+      a1 * b2 * d3 -
+      a1 * b3 * d2 -
+      a2 * b1 * d3 +
+      a2 * b3 * d1 +
+      a3 * b1 * d2 -
+      a3 * b2 * d1
+    ) /
+    (a1 * b2 * c3 -
+      a1 * b3 * c2 -
+      a2 * b1 * c3 +
+      a2 * b3 * c1 +
+      a3 * b1 * c2 -
+      a3 * b2 * c1);
+  const v4 = new THREE.Vector3(0, 0, 0);
+  triangle.getNormal(v4);
+  const circleGeometry = new THREE.RingGeometry(radius, radius + 1, 32);
+  circleGeometry.lookAt(v4);
+  circleGeometry.translate(x, y, z);
+
+  // 创建材质
+  const material = new THREE.MeshBasicMaterial({
+    color: 0xefdbff,
+    side: THREE.DoubleSide
+  });
+  // 创建圆并添加到场景
+  const circle1 = new THREE.Mesh(circleGeometry, material);
+  if (type == "add") {
+    radiusRing.push(circle1);
+    scene.add(circle1);
+  } else {
+    scene.remove(radiusRing[radiuslineId]);
+    radiusRing[radiuslineId] = circle1;
+    scene.add(circle1);
   }
 }
 
@@ -840,8 +865,8 @@ function draggablePoint(el, id) {
     if (intersects.length === 0) {
       intersects = raycaster.intersectObjects(scene.children[3].children);
     }
-    //排除含有lineId的物体
-    intersects = intersects.filter(item => !("lineId" in item.object));
+    //排除含有
+    // intersects = intersects.filter(item => !(item.object));
     if (intersects.length === 0) return;
     //变更线段两端点的位置
     let arrayStart = index && 3;
@@ -894,8 +919,8 @@ function draggableRadiusPoint(el, id, index) {
     if (intersects.length === 0) {
       intersects = raycaster.intersectObjects(scene.children[3].children);
     }
-    //排除含有lineId的物体
-    intersects = intersects.filter(item => !("radiuslineId" in item.object));
+    //排除含有
+    // intersects = intersects.filter(item => !(item.object));
     if (intersects.length === 0) return;
     updateLineRadiusPoint(line, intersects[0].point, index * 3, point, id);
   }
@@ -949,6 +974,7 @@ function updateLineRadiusPoint(line, point, arrayIndex, points, id) {
     angleText2.innerHTML = angle1.toFixed(2) + "°";
     angleText3.innerHTML = angle2.toFixed(2) + "°";
   };
+  addRingGeometry(triangle, point0, point1, point2, id, "update", radius);
 }
 
 function animate() {
@@ -963,8 +989,8 @@ function render() {
 </script>
 
 <template>
-  <div class="flex">
-    <div id="sss" class="w-[1000px] h-[600px] relative" />
+  <div class="flex w-[1200px]">
+    <div id="container" class="w-[1000px] h-[600px] relative" />
     <div class="w-50 flex flex-col justify-start">
       <el-button type="primary" @click="distance"> 测距 </el-button>
       <el-button type="primary" @click="radius">
