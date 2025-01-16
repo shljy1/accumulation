@@ -250,6 +250,14 @@ const threeRouter = {
         title: "模型测量",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/three/mirror/index",
+      name: "mirrorPage",
+      meta: {
+        title: "镜子",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
