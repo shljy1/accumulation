@@ -8,8 +8,8 @@ const loadingManager = new THREE.LoadingManager(function () {});
 const loader = new ColladaLoader(loadingManager);
 // const axesHelper = new THREE.AxesHelper( 5 );
 // scene.add( axesHelper );
-const archer = await useGLTF("/src/assets/threeDemo/archer/scene.gltf");
-await loader.load("/src/assets/threeDemo/girl/elf.dae", function (collada) {
+const archer = await useGLTF("/threeDemo/archer/scene.gltf");
+await loader.load("/threeDemo/girl/elf.dae", function (collada) {
   const model = collada.scene;
   const archerModel = archer.scene;
   scene.add(model);

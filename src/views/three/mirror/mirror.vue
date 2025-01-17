@@ -25,7 +25,7 @@ import * as THREE from "three";
 let model;
 const loadingManager = new THREE.LoadingManager(function () {});
 const loader = new ColladaLoader(loadingManager);
-await loader.load("/src/assets/threeDemo/girl/elf.dae", function (collada) {
+await loader.load("/threeDemo/girl/elf.dae", function (collada) {
   model = collada.scene;
   model.scale.set(0.4, 0.4, 0.4);
   model.position.x = 2;

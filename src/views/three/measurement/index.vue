@@ -61,7 +61,7 @@ const init = () => {
   camera.lookAt(scene.position);
   const loadingManager = new THREE.LoadingManager(function () {});
   const loader = new ColladaLoader(loadingManager);
-  loader.load("/src/assets/threeDemo/girl/elf.dae", function (collada) {
+  loader.load("/threeDemo/girl/elf.dae", function (collada) {
     // objMesh = collada.scene;
     // initExplodeModel(collada);
     const model = collada.scene;
