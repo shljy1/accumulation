@@ -9,7 +9,7 @@
       <OrbitControls />
       <Suspense>
         <TresMesh ref="boxRef">
-          <GirlDemo />
+          <CarDemo />
         </TresMesh>
       </Suspense>
       <TresAmbientLight :position="[1, 5, 15]" color="#d3adf7" :intensity="3" />
@@ -22,19 +22,19 @@ import { TresCanvas, useRenderLoop } from "@tresjs/core";
 import { OrbitControls } from "@tresjs/cientos";
 import * as THREE from "three";
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from "three";
-import GirlDemo from "./girlDemo.vue";
+import CarDemo from "./carDemo.vue";
 defineOptions({
-  name: "girlPage"
+  name: "carPage"
 });
 const boxRef = shallowRef<THREE.Object3D>();
 
-const { onLoop } = useRenderLoop();
+// const { onLoop } = useRenderLoop();
 
-onLoop(({ delta, elapsed }) => {
-  if (boxRef.value) {
-    boxRef.value.rotation.y += delta;
-  }
-});
+// onLoop(({ delta, elapsed }) => {
+//   if (boxRef.value) {
+//     boxRef.value.rotation.y += delta;
+//   }
+// });
 const gl = {
   clearColor: "#1f1f1f",
   shadows: true,

@@ -12,10 +12,10 @@
         class="rounded-lg w-[1024px] h-[670px]"
         src="https://tresjs.org"
         frameborder="0"
-      ></iframe>
+      />
     </Html>
   </primitive>
-  <primitive :object="model"> </primitive>
+  <primitive :object="model" />
 </template>
 
 <script setup lang="ts">

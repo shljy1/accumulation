@@ -46,8 +46,8 @@ const raycaster1 = new THREE.Raycaster();
 
 const mouse = new THREE.Vector2();
 
-// var objMesh = null;
-// const explodeValue = ref(0);
+var objMesh = null;
+const explodeValue = ref(0);
 
 const init = () => {
   const axisHelper = new THREE.AxesHelper(200);
@@ -62,12 +62,13 @@ const init = () => {
   const loadingManager = new THREE.LoadingManager(function () {});
   const loader = new ColladaLoader(loadingManager);
   loader.load("/threeDemo/girl/elf.dae", function (collada) {
-    // objMesh = collada.scene;
-    // initExplodeModel(collada);
     const model = collada.scene;
     model.scale.set(20, 20, 20);
     model.rotation.z = 1;
     scene.add(model);
+    //爆炸模型的载入需在模型变换完成之后，此模型无爆炸效果是因为此模型只有一个mesh
+    objMesh = model;
+    initExplodeModel(objMesh);
     render();
   });
 
@@ -86,70 +87,70 @@ function WorldtoScreenPosition(pos) {
   };
 }
 
-// function getWorldCenterPosition(box, scalar = 0.5) {
-//   return new THREE.Vector3()
-//     .addVectors(box.max, box.min)
-//     .multiplyScalar(scalar);
-// }
+function getWorldCenterPosition(box, scalar = 0.5) {
+  return new THREE.Vector3()
+    .addVectors(box.max, box.min)
+    .multiplyScalar(scalar);
+}
 
-// 初始化爆炸数据保存到每个mesh的userdata上
-// function initExplodeModel(modelObject) {
-//   if (!modelObject) return;
-//   // 计算模型中心
-//   const explodeBox = new THREE.Box3();
-//   explodeBox.setFromObject(modelObject);
-//   const explodeCenter = getWorldCenterPosition(explodeBox);
+//初始化爆炸数据保存到每个mesh的userdata上
+function initExplodeModel(modelObject) {
+  if (!modelObject) return;
+  // 计算模型中心
+  const explodeBox = new THREE.Box3();
+  explodeBox.setFromObject(modelObject);
+  const explodeCenter = getWorldCenterPosition(explodeBox);
 
-//   const meshBox = new THREE.Box3();
+  const meshBox = new THREE.Box3();
 
-//   // 遍历整个模型，保存数据到userData上，以便爆炸函数使用
-//   modelObject.traverse(function (value) {
-//     if (value.isMark || value.isMarkChild || value.isLine || value.isSprite)
-//       return;
-//     if (value.isMesh) {
-//       meshBox.setFromObject(value);
-//       const meshCenter = getWorldCenterPosition(meshBox);
-//       // 爆炸方向
-//       value.userData.worldDir = new THREE.Vector3()
-//         .subVectors(meshCenter, explodeCenter)
-//         .normalize();
-//       // 爆炸距离 mesh中心点到爆炸中心点的距离
-//       value.userData.worldDistance = new THREE.Vector3().subVectors(
-//         meshCenter,
-//         explodeCenter
-//       );
-//       // 原始坐标
-//       value.userData.originPosition = value.getWorldPosition(
-//         new THREE.Vector3()
-//       );
-//       // mesh中心点
-//       value.userData.meshCenter = meshCenter.clone();
-//       value.userData.explodeCenter = explodeCenter.clone();
-//     }
-//   });
-// }
+  // 遍历整个模型，保存数据到userData上，以便爆炸函数使用
+  modelObject.traverse(function (value) {
+    if (value.isMark || value.isMarkChild || value.isLine || value.isSprite)
+      return;
+    if (value.isMesh) {
+      meshBox.setFromObject(value);
+      const meshCenter = getWorldCenterPosition(meshBox);
+      // 爆炸方向
+      value.userData.worldDir = new THREE.Vector3()
+        .subVectors(meshCenter, explodeCenter)
+        .normalize();
+      // 爆炸距离 mesh中心点到爆炸中心点的距离
+      value.userData.worldDistance = new THREE.Vector3().subVectors(
+        meshCenter,
+        explodeCenter
+      );
+      // 原始坐标
+      value.userData.originPosition = value.getWorldPosition(
+        new THREE.Vector3()
+      );
+      // mesh中心点
+      value.userData.meshCenter = meshCenter.clone();
+      value.userData.explodeCenter = explodeCenter.clone();
+    }
+  });
+}
 
-// function explodeChange() {
-//   explodeModel(objMesh, explodeValue.value);
-//   render();
-// }
+function explodeChange() {
+  explodeModel(objMesh, explodeValue.value);
+  render();
+}
 
-// function explodeModel(model, scalar) {
-//   model.traverse(function (value) {
-//     if (!value.isMesh || !value.userData.originPosition) return;
-//     const distance = value.userData.worldDir
-//       .clone()
-//       .multiplyScalar(value.userData.worldDistance.length() * scalar);
-//     const offset = new THREE.Vector3().subVectors(
-//       value.userData.meshCenter,
-//       value.userData.originPosition
-//     );
-//     const center = value.userData.meshCenter;
-//     const newPos = new THREE.Vector3().copy(center).add(distance).sub(offset);
-//     const localPosition = value.parent?.worldToLocal(newPos.clone());
-//     localPosition && value.position.copy(localPosition);
-//   });
-// }
+function explodeModel(model, scalar) {
+  model.traverse(function (value) {
+    if (!value.isMesh || !value.userData.originPosition) return;
+    const distance = value.userData.worldDir
+      .clone()
+      .multiplyScalar(value.userData.worldDistance.length() * scalar);
+    const offset = new THREE.Vector3().subVectors(
+      value.userData.meshCenter,
+      value.userData.originPosition
+    );
+    const center = value.userData.meshCenter;
+    const newPos = new THREE.Vector3().copy(center).add(distance).sub(offset);
+    const localPosition = value.parent?.worldToLocal(newPos.clone());
+    localPosition && value.position.copy(localPosition);
+  });
+}
 
 const isDistance = ref(false);
 const isRadius = ref(false);
@@ -996,7 +997,13 @@ function render() {
       <el-button type="primary" @click="radius">
         半径<span id="radius" />
       </el-button>
-
+      <el-slider
+        v-model="explodeValue"
+        :max="10"
+        :step="0.1"
+        class="pl-[20px]"
+        @input="explodeChange()"
+      />
       <el-dropdown>
         <el-button type="primary">清除</el-button>
         <template #dropdown>
@@ -1021,16 +1028,6 @@ function render() {
 }
 </style>
 <!-- 厚度测试功能有待测试
-<el-dropdown-item @click="thicknessRemoveBtn"
+<el-dropdown-item @click="thicknessRemove"
 >清除厚度</el-dropdown-item
->
-<el-button @click="thickness"> 厚度 </el-button>   
-<el-slider
-:max="10"
-:step="0.1"
-:style="{
-  width: '150px'
-}"
-v-model="explodeValue"
-@input="explodeChange()"
-/> -->
+>-->

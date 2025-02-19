@@ -258,6 +258,14 @@ const threeRouter = {
         title: "镜子",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/three/car/index",
+      name: "carPage",
+      meta: {
+        title: "汽车",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
