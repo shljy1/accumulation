@@ -11,10 +11,10 @@ const flatModel = (scene: Object3D) => {
   });
   return modelArr;
 };
-const { scene, materials } = await useGLTF(
+const res: any = await useGLTF(
   "/threeDemo/su7_car/sm_car.gltf",
   { draco: false },
-  gltfLoader => {
+  (gltfLoader: any) => {
     gltfLoader.setMeshoptDecoder(MeshoptDecoder);
   }
 );
@@ -32,7 +32,7 @@ for (let i = 0; i < pTexture.length; i++) {
   pTexture[i].flipY = false;
 }
 
-const carModel = flatModel(scene);
+const carModel = flatModel(res.scene);
 
 const body = carModel[2] as THREE.Mesh;
 const bodyMat = body.material as THREE.MeshStandardMaterial;
@@ -51,11 +51,11 @@ wheel.children.forEach(child => {
   mat.envMapIntensity = 4;
 });
 // materials.Car_body.color.set(new THREE.Color('#e0b023'))
-materials.Car_body.color.set("#ffffff");
-materials.Car_body.map = pTexture[2];
-materials.Car_body.envMapIntensity = 2;
+res.materials.Car_body.color.set("#ffffff");
+res.materials.Car_body.map = pTexture[2];
+res.materials.Car_body.envMapIntensity = 2;
 </script>
 
 <template>
-  <primitive :object="scene" />
+  <primitive :object="res.scene" />
 </template>

@@ -10,6 +10,7 @@
       <Suspense>
         <TresMesh ref="boxRef">
           <CarDemo />
+          <Screen />
         </TresMesh>
       </Suspense>
       <TresAmbientLight :position="[1, 5, 15]" color="#d3adf7" :intensity="3" />
@@ -23,6 +24,7 @@ import { OrbitControls } from "@tresjs/cientos";
 import * as THREE from "three";
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from "three";
 import CarDemo from "./carDemo.vue";
+import Screen from "./screen.vue";
 defineOptions({
   name: "carPage"
 });
