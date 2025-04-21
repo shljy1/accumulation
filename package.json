@@ -132,16 +132,9 @@
   },
   "pnpm": {
     "allowedDeprecatedVersions": {
-      "are-we-there-yet": "*",
       "sourcemap-codec": "*",
-      "domexception": "*",
-      "w3c-hr-time": "*",
-      "inflight": "*",
-      "npmlog": "*",
       "rimraf": "*",
       "stable": "*",
-      "gauge": "*",
-      "abab": "*",
       "glob": "*"
     },
     "peerDependencyRules": {

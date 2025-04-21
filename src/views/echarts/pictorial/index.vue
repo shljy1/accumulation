@@ -156,7 +156,7 @@ const initBar = () => {
         symbolPosition: "start",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, Number(5)],
+        symbolOffset: [0, 5],
         data: [4, 5, 6, 7]
       },
       {
@@ -165,7 +165,7 @@ const initBar = () => {
         symbolPosition: "end",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, -Number(5)],
+        symbolOffset: [0, -5],
         xAxisIndex: 2,
         tooltip: {
           show: false
@@ -195,7 +195,7 @@ const initBar = () => {
         type: "pictorialBar",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, Number(5)],
+        symbolOffset: [0, 5],
         barGap: "100%",
         tooltip: {
           show: false
@@ -213,7 +213,7 @@ const initBar = () => {
         type: "pictorialBar",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, -Number(5)],
+        symbolOffset: [0, -5],
         symbolPosition: "end",
         barGap: "100%",
         tooltip: {

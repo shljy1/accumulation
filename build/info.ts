@@ -7,7 +7,7 @@ import boxen, { type Options as BoxenOptions } from "boxen";
 dayjs.extend(duration);
 
 const welcomeMessage = gradientString("cyan", "magenta").multiline(
-  `您好! 欢迎使用shljy项目,这是一个已pure-admin为框架的个人项目`
+  `您好! 欢迎使用shljy项目,这是一个以pure-admin为框架的个人项目`
 );
 
 const boxenOptions: BoxenOptions = {
