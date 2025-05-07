@@ -22,7 +22,7 @@ import { TresCanvas, useRenderLoop } from "@tresjs/core";
 import { OrbitControls } from "@tresjs/cientos";
 import * as THREE from "three";
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from "three";
-import GirlDemo from "./girlDemo.vue";
+import GirlDemo from "./girlDemo1.vue";
 defineOptions({
   name: "girlPage"
 });
