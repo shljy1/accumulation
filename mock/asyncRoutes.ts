@@ -113,6 +113,23 @@ const elementUIRouter = {
           }
         }
       ]
+    },
+    {
+      path: "/elementUI/tree",
+      meta: {
+        title: "树形控件",
+        roles: ["admin", "common"]
+      },
+      children: [
+        {
+          path: "/elementUI/tree/editTree",
+          component: "elementUI/tree/editTree/index",
+          name: "editTreePage",
+          meta: {
+            title: "编辑树"
+          }
+        }
+      ]
     }
   ]
 };
