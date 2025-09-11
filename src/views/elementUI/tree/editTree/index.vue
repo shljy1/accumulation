@@ -10,6 +10,7 @@
       :data="treeData"
       node-key="id"
       default-expand-all
+      :draggable="draggable"
       :expand-on-click-node="false"
       @node-contextmenu="handleNodeContextmenu"
     >
@@ -52,6 +53,7 @@ const contextmenuPosition = ref({
 });
 const editNode = ref("add"); //命名状态是新增还是编辑
 const currentNode = ref({}); //右键选中的节点
+const draggable = ref(true); //树是否可拖到动，编辑时不行
 const treeRef = ref(null);
 const treeData = ref([
   {
@@ -122,12 +124,14 @@ const onBlur = data => {
   if (data.label == "") {
     if (editNode.value == "add") {
       treeRef.value.remove(data.id);
+      draggable.value = true;
     } else {
       ElMessage.error("请输入文件夹名称");
       inputRefs.value[data.id]?.focus();
     }
   } else {
     data.edit = false;
+    draggable.value = true;
     //触发tree组件更新实现编辑的响应式
     treeData.value = [...treeData.value];
   }
@@ -152,6 +156,7 @@ const handleNodeContextmenu = (event, data) => {
 const onRename = data => {
   editNode.value = "edit";
   data.edit = true;
+  draggable.value = false;
   //触发tree组件更新实现编辑的响应式
   treeData.value = [...treeData.value];
   nextTick(() => {

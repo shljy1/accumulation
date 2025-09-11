@@ -11,6 +11,7 @@
         <TresMesh ref="boxRef">
           <CarDemo />
           <Screen />
+          <Particle />
         </TresMesh>
       </Suspense>
       <TresAmbientLight :position="[1, 5, 15]" color="#d3adf7" :intensity="3" />
@@ -25,6 +26,7 @@ import * as THREE from "three";
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from "three";
 import CarDemo from "./carDemo.vue";
 import Screen from "./screen.vue";
+import Particle from "./particle.vue";
 defineOptions({
   name: "carPage"
 });
