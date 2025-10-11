@@ -1,10 +1,11 @@
 <template>
-  <div class="w-80 h-80">
+  <div class="w-[800px] h-[600px] relative">
+    <div id="dissolveGui" class="absolute z-[999] right-0" />
     <TresCanvas v-bind="gl">
-      <TresPerspectiveCamera :position="[0, 0, 1]" :look-at="[0, 0, 0]" />
+      <TresPerspectiveCamera :position="[0, 0, 10]" :look-at="[0, 0, 0]" />
       <OrbitControls />
       <Suspense>
-        <Hexagram />
+        <Dissolve />
       </Suspense>
       <TresAmbientLight :intensity="2" />
     </TresCanvas>
@@ -14,9 +15,9 @@
 import { TresCanvas } from "@tresjs/core";
 import { OrbitControls } from "@tresjs/cientos";
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from "three";
-import Hexagram from "./hexagram.vue";
+import Dissolve from "./dissolve.vue";
 defineOptions({
-  name: "hexagramPage"
+  name: "dissolvePage"
 });
 const gl = {
   clearColor: "#000000",

@@ -285,10 +285,18 @@ const threeRouter = {
       }
     },
     {
-      path: "/three/Hexagram/index",
+      path: "/three/hexagram/index",
       name: "hexagramPage",
       meta: {
         title: "六芒星",
+        roles: ["admin", "common"]
+      }
+    },
+    {
+      path: "/three/dissolve/index",
+      name: "dissolvePage",
+      meta: {
+        title: "溶解",
         roles: ["admin", "common"]
       }
     }

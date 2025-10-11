@@ -19,7 +19,7 @@
 import { TresCanvas } from "@tresjs/core";
 import { OrbitControls } from "@tresjs/cientos";
 import { BasicShadowMap, SRGBColorSpace, NoToneMapping } from "three";
-import UgglyBunny from "./UgglyBunny.vue";
+import UgglyBunny from "./ugglyBunny.vue";
 defineOptions({
   name: "ugglyBunnyPage"
 });
