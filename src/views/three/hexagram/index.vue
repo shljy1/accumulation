@@ -1,7 +1,8 @@
 <template>
-  <div class="w-80 h-80">
+  <div class="w-[500px] h-[500px] relative">
+    <div id="hexagramGui" class="absolute z-[999] right-0" />
     <TresCanvas v-bind="gl">
-      <TresPerspectiveCamera :position="[0, 0, 1]" :look-at="[0, 0, 0]" />
+      <TresPerspectiveCamera :position="[0, 0, 1.5]" :look-at="[0, 0, 0]" />
       <OrbitControls />
       <Suspense>
         <Hexagram />

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import * as THREE from "three";
+import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 let scene;
 scene = new THREE.Scene();
 const uniforms = {
   iTime: {
     value: 0
-  }
+  },
+  color: { value: new THREE.Color(0xdbb8ff) }
 };
 
 const geometry = new THREE.PlaneGeometry(1, 1);
@@ -29,6 +31,7 @@ const material = new THREE.ShaderMaterial({
     float PI = 3.1415926;
     uniform float iTime;
     varying vec2 vUv;
+    uniform vec3 color;
     
     vec2 rotate(vec2 p, float rad) {
         mat2 m = mat2(cos(rad), sin(rad), -sin(rad), cos(rad));
@@ -172,6 +175,9 @@ const material = new THREE.ShaderMaterial({
         if(length(p)>0.5 && length(p)<0.6){
             return pow(dst, 2.5) * vec3(1, 0.95, 0.8);
         }
+        if( length(p)<0.1){
+            return pow(dst, 2.5) * color;
+        }
         return pow(dst, 2.5) * vec3(0.7, 0.5, 0.92);
     }
     void main() { 
@@ -180,6 +186,9 @@ const material = new THREE.ShaderMaterial({
     }
     `
 });
+
+const gui = new GUI({ container: document.querySelector("#hexagramGui") });
+gui.addColor(uniforms.color, "value").name("Color");
 
 const mesh = new THREE.Mesh(geometry, material);
 //sdEquilateralTriangle的实现流程，

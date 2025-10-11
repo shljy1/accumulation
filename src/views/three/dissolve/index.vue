@@ -2,7 +2,7 @@
   <div class="w-[800px] h-[600px] relative">
     <div id="dissolveGui" class="absolute z-[999] right-0" />
     <TresCanvas v-bind="gl">
-      <TresPerspectiveCamera :position="[0, 0, 10]" :look-at="[0, 0, 0]" />
+      <TresPerspectiveCamera :position="[0, 0, 5]" :look-at="[0, 0, 0]" />
       <OrbitControls />
       <Suspense>
         <Dissolve />

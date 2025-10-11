@@ -7,11 +7,12 @@ let scene;
 scene = new THREE.Scene();
 const textureLoader = new THREE.TextureLoader();
 
-/* Tex */
+/* Tex 决定从哪个位置开始溶解 */
 const dissolveTex = textureLoader.load(
   `https://file.threehub.cn/` + "images/dissolve/dissolveTex.png"
 );
 dissolveTex.colorSpace = THREE.SRGBColorSpace;
+/* Ramp 决定溶解时的颜色效果 */
 const dissolveRampTex = textureLoader.load(
   `https://file.threehub.cn/` + "images/dissolve/dissolveRamp.png"
 );
