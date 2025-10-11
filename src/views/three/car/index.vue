@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[400px] h-[600px]">
+  <div class="w-[1200px] h-[600px]">
     <TresCanvas v-bind="gl">
       <TresPerspectiveCamera
         :args="[45, 0.67, 0.1, 1000]"

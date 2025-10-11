@@ -283,6 +283,14 @@ const threeRouter = {
         title: "汽车",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/three/Hexagram/index",
+      name: "hexagramPage",
+      meta: {
+        title: "六芒星",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };

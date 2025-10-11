@@ -25,26 +25,39 @@ const randomColor = (min: number, max: number) => {
 const canvas = document.createElement("canvas");
 const _canvas = document.createElement("canvas");
 const _ctx = _canvas.getContext("2d")!;
-_canvas.width = 1500;
+
+// _canvas.width = 1500;
+// _canvas.height = 400;
+// const w = 1500;
+// const h = 400;
+// let _text = ["s", "h", "l", "j", "y"];
+// for (let i = 0; i < _text.length; i += 1) {
+//   const text = _text[i];
+//   const fontSize = randomNum(230, 360);
+//   const deg = randomNum(-30, 30);
+//   _ctx.font = `${fontSize}px Simhei`;
+//   _ctx.textBaseline = "top";
+//   _ctx.fillStyle = randomColor(80, 150);
+//   _ctx.save();
+//   _ctx.translate(300 * i + 150, 150);
+//   _ctx.rotate((deg * Math.PI) / 180);
+//   _ctx.fillText(text, -150 + 50, -150);
+//   _ctx.restore();
+// }
+
+_canvas.width = 3000;
 _canvas.height = 400;
-
-let _text = ["s", "h", "l", "j", "y"];
-for (let i = 0; i < _text.length; i += 1) {
-  const text = _text[i];
-  const fontSize = randomNum(230, 360);
-  const deg = randomNum(-30, 30);
-  _ctx.font = `${fontSize}px Simhei`;
-  _ctx.textBaseline = "top";
-  _ctx.fillStyle = randomColor(80, 150);
-  _ctx.save();
-  _ctx.translate(300 * i + 150, 150);
-  _ctx.rotate((deg * Math.PI) / 180);
-  _ctx.fillText(text, -150 + 50, -150);
-  _ctx.restore();
-}
-
-const w = 1500;
+const w = 3000;
 const h = 400;
+const fontSize = randomNum(80, 80);
+const deg = randomNum(-5, 5);
+_ctx.font = `${fontSize}px Simhei`;
+_ctx.textBaseline = "top";
+_ctx.fillStyle = randomColor(80, 150);
+_ctx.translate(150, 150);
+_ctx.rotate((deg * Math.PI) / 180);
+_ctx.fillText("Ototoi wa usagi o mita no. Kino wa shika, kyou wa anata", 0, 0);
+
 canvas.width = w;
 canvas.height = h;
 const ctx = canvas.getContext("2d");
