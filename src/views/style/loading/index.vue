@@ -3,6 +3,9 @@
     <div
       class="loading w-40 h-40 rounded-full border-t-4 border-t-indigo-500 relative"
     />
+    <div class="absolute">
+      {{ props.progress ? props.progress : "" }}
+    </div>
   </div>
 </template>
 
@@ -10,6 +13,8 @@
 defineOptions({
   name: "loadingPage"
 });
+
+const props = defineProps(["progress"]);
 </script>
 <style lang="scss" scoped>
 .loading {
