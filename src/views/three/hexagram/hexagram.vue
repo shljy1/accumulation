@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import * as THREE from "three";
+import { onUnmounted } from "vue";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 let scene;
 scene = new THREE.Scene();
@@ -27,7 +28,6 @@ const material = new THREE.ShaderMaterial({
     }
   `,
   fragmentShader: `
-    uniform float ratio;
     float PI = 3.1415926;
     uniform float iTime;
     varying vec2 vUv;
@@ -189,7 +189,11 @@ const material = new THREE.ShaderMaterial({
 
 const gui = new GUI({ container: document.querySelector("#hexagramGui") });
 gui.addColor(uniforms.color, "value").name("Color");
-
+onUnmounted(() => {
+  if (gui) {
+    gui.destroy();
+  }
+});
 const mesh = new THREE.Mesh(geometry, material);
 //sdEquilateralTriangle的实现流程，
 // 先按y轴对折只计算x轴右侧的点，
