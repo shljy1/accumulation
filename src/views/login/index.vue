@@ -12,7 +12,7 @@ import { bg, avatar, illustration } from "./utils/static";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import { ref, reactive, toRaw, onMounted, onBeforeUnmount } from "vue";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
-
+import * as echarts from "echarts";
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
 import Lock from "@iconify-icons/ri/lock-fill";
@@ -68,8 +68,63 @@ function onkeypress({ code }: KeyboardEvent) {
   }
 }
 
+const titleRender = () => {
+  var chartDom = document.getElementById("title");
+  var myChart = echarts.init(chartDom);
+  var option: any;
+  option = {
+    graphic: {
+      elements: [
+        {
+          type: "text",
+          left: "center",
+          top: "center",
+          style: {
+            text: title.value.toUpperCase(),
+            fontSize: 32,
+            fontWeight: "bold",
+            lineDash: [0, 200],
+            lineDashOffset: 0,
+            fill: "transparent",
+            stroke: "#000",
+            lineWidth: 1
+          },
+          keyframeAnimation: {
+            duration: 2500,
+            keyframes: [
+              {
+                percent: 0.7,
+                style: {
+                  fill: "transparent",
+                  lineDashOffset: 200,
+                  lineDash: [200, 0]
+                }
+              },
+              {
+                percent: 0.8,
+                style: {
+                  fill: "transparent"
+                }
+              },
+              {
+                percent: 1,
+                style: {
+                  fill: "#999",
+                  lineWidth: 0
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  };
+
+  option && myChart.setOption(option);
+};
 onMounted(() => {
   window.document.addEventListener("keypress", onkeypress);
+  titleRender();
 });
 
 onBeforeUnmount(() => {
@@ -97,10 +152,7 @@ onBeforeUnmount(() => {
       <div class="login-box">
         <div class="login-form">
           <avatar class="avatar" />
-          <Motion>
-            <h2 class="outline-none">{{ title }}</h2>
-          </Motion>
-
+          <div id="title" class="w-[360px] h-[40px] my-[15px]" />
           <el-form
             ref="ruleFormRef"
             :model="ruleForm"
