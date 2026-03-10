@@ -45,10 +45,10 @@ const _ctx = _canvas.getContext("2d")!;
 //   _ctx.restore();
 // }
 
-_canvas.width = 3000;
-_canvas.height = 400;
-const w = 3000;
+const w = 1200;
 const h = 400;
+_canvas.width = w;
+_canvas.height = h;
 const fontSize = randomNum(80, 80);
 const deg = randomNum(-5, 5);
 _ctx.font = `${fontSize}px Simhei`;
@@ -56,7 +56,9 @@ _ctx.textBaseline = "top";
 _ctx.fillStyle = randomColor(80, 150);
 _ctx.translate(150, 150);
 _ctx.rotate((deg * Math.PI) / 180);
-_ctx.fillText("Ototoi wa usagi o mita no. Kino wa shika, kyou wa anata", 0, 0);
+_ctx.fillText("Ototoi wa usagi o mita no", 0, -100);
+_ctx.fillText("Kino wa shika", 0, 0);
+_ctx.fillText("kyou wa anata", 0, 100);
 
 canvas.width = w;
 canvas.height = h;

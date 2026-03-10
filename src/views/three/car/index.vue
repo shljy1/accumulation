@@ -30,8 +30,7 @@ import Particle from "./particle.vue";
 defineOptions({
   name: "carPage"
 });
-const boxRef = shallowRef<THREE.Object3D>();
-
+//const boxRef = shallowRef<THREE.Object3D>();
 // const { onLoop } = useRenderLoop();
 
 // onLoop(({ delta, elapsed }) => {

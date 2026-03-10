@@ -21,8 +21,8 @@ const material = new THREE.ShaderMaterial({
 
   vertexShader: `
     varying vec2 vUv;
-    void main() { 
-        vUv = uv; 
+    void main() {
+        vUv = uv;
         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
         gl_Position = projectionMatrix * mvPosition;
     }
@@ -32,20 +32,20 @@ const material = new THREE.ShaderMaterial({
     uniform float iTime;
     varying vec2 vUv;
     uniform vec3 color;
-    
+
     vec2 rotate(vec2 p, float rad) {
         mat2 m = mat2(cos(rad), sin(rad), -sin(rad), cos(rad));
         return m * p;
     }
-    
+
     vec2 translate(vec2 p, vec2 diff) {
         return p - diff;
     }
-    
+
     vec2 scale(vec2 p, float r) {
         return p*r;
     }
-    
+
     float circle(float pre, vec2 p, float r1, float r2, float power) {
         float leng = length(p);
         float d = min(abs(leng-r1), abs(leng-r2));
@@ -53,7 +53,7 @@ const material = new THREE.ShaderMaterial({
         float res = power / d;
         return clamp(pre + res, 0.0, 1.0);
     }
-    
+
     float rectangle(float pre, vec2 p, vec2 half1, vec2 half2, float power) {
         p = abs(p);
         if ((half1.x<p.x || half1.y<p.y) && (p.x<half2.x && p.y<half2.y)) {
@@ -72,8 +72,8 @@ const material = new THREE.ShaderMaterial({
         float d = 1e10;
         for(int i=0; i<360; i++) {
             if (i>=num) break;
-            float _d = (r1<p.y && p.y<r2) ? 
-                abs(p.x) : 
+            float _d = (r1<p.y && p.y<r2) ?
+                abs(p.x) :
                 min(length(p-vec2(0.0, r1)), length(p-vec2(0.0, r2)));
             d = min(d, _d);
             p = rotate(p, angle);
@@ -170,7 +170,7 @@ const material = new THREE.ShaderMaterial({
             for(int i=0; i<n; i++) {
               dst = sdEquilateralTriangle(dst, q, 0.0866, 0.0015);
               q = rotate(q, angle);
-            } 
+            }
         }
         if(length(p)>0.5 && length(p)<0.6){
             return pow(dst, 2.5) * vec3(1, 0.95, 0.8);
@@ -180,7 +180,7 @@ const material = new THREE.ShaderMaterial({
         }
         return pow(dst, 2.5) * vec3(0.7, 0.5, 0.92);
     }
-    void main() { 
+    void main() {
         vec2 uv = (vUv - 0.5) * 2.0;
         gl_FragColor = vec4(calc(uv), 1.0);;
     }

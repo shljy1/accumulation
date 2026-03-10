@@ -293,6 +293,14 @@ const threeRouter = {
       }
     },
     {
+      path: "/three/glslCartoon/index",
+      name: "glslCartoonPage",
+      meta: {
+        title: "glsl动画",
+        roles: ["admin", "common"]
+      }
+    },
+    {
       path: "/three/dissolve/index",
       name: "dissolvePage",
       meta: {
