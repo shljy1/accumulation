@@ -11,10 +11,10 @@ const loader = new ColladaLoader(loadingManager);
 // scene.add( axesHelper );
 
 const [archer, collada]: Array<any> = await Promise.all([
-  useGLTF("/threeDemo/archer/scene.gltf"),
+  useGLTF(`${import.meta.env.BASE_URL}threeDemo/archer/scene.gltf`),
   new Promise((resolve, reject) => {
     loader.load(
-      "/threeDemo/girl/elf.dae",
+      `${import.meta.env.BASE_URL}threeDemo/girl/elf.dae`,
       resolve,
       function (xhr) {
         emit("loadProgress", ((xhr.loaded / xhr.total) * 100).toFixed(2) + "%");

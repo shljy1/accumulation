@@ -61,16 +61,19 @@ const init = () => {
   camera.lookAt(scene.position);
   const loadingManager = new THREE.LoadingManager(function () {});
   const loader = new ColladaLoader(loadingManager);
-  loader.load("/threeDemo/girl/elf.dae", function (collada) {
-    const model = collada.scene;
-    model.scale.set(20, 20, 20);
-    model.rotation.z = 1;
-    scene.add(model);
-    //爆炸模型的载入需在模型变换完成之后，此模型无爆炸效果是因为此模型只有一个mesh
-    objMesh = model;
-    initExplodeModel(objMesh);
-    render();
-  });
+  loader.load(
+    `${import.meta.env.BASE_URL}threeDemo/girl/elf.dae`,
+    function (collada) {
+      const model = collada.scene;
+      model.scale.set(20, 20, 20);
+      model.rotation.z = 1;
+      scene.add(model);
+      //爆炸模型的载入需在模型变换完成之后，此模型无爆炸效果是因为此模型只有一个mesh
+      objMesh = model;
+      initExplodeModel(objMesh);
+      render();
+    }
+  );
 
   renderer.domElement.addEventListener("click", onClick, false);
 };

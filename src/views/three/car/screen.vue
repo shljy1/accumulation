@@ -14,9 +14,12 @@ import * as THREE from "three";
 import { useVideoTexture } from "@tresjs/cientos";
 
 const texture = ref();
-texture.value = await useVideoTexture("/threeDemo/su7_car/vlg.mp4", {
-  loop: true
-});
+texture.value = await useVideoTexture(
+  `${import.meta.env.BASE_URL}threeDemo/su7_car/vlg.mp4`,
+  {
+    loop: true
+  }
+);
 texture.value.colorSpace = THREE.SRGBColorSpace;
 
 const tmSceen = ref();

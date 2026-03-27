@@ -12,16 +12,16 @@ const flatModel = (scene: Object3D) => {
   return modelArr;
 };
 const res: any = await useGLTF(
-  "/threeDemo/su7_car/sm_car.gltf",
+  `${import.meta.env.BASE_URL}threeDemo/su7_car/sm_car.gltf`,
   { draco: false },
   (gltfLoader: any) => {
     gltfLoader.setMeshoptDecoder(MeshoptDecoder);
   }
 );
 const pTexture = await useTexture([
-  "/threeDemo/su7_car/t_car_body_AO.raw.jpg",
-  "/threeDemo/su7_car/t_cat_car_body_bc.webp",
-  "/threeDemo/su7_car/t_gm_car_body_bc.webp"
+  `${import.meta.env.BASE_URL}threeDemo/su7_car/t_car_body_AO.raw.jpg`,
+  `${import.meta.env.BASE_URL}threeDemo/su7_car/t_cat_car_body_bc.webp`,
+  `${import.meta.env.BASE_URL}threeDemo/su7_car/t_gm_car_body_bc.webp`
 ]);
 
 pTexture[0].colorSpace = THREE.LinearSRGBColorSpace;

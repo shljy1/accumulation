@@ -25,12 +25,15 @@ import * as THREE from "three";
 let model;
 const loadingManager = new THREE.LoadingManager(function () {});
 const loader = new ColladaLoader(loadingManager);
-loader.load("/threeDemo/girl/elf.dae", function (collada) {
-  model = collada.scene;
-  model.scale.set(0.4, 0.4, 0.4);
-  model.position.x = 2;
-  model.position.y = -1;
-});
+loader.load(
+  `${import.meta.env.BASE_URL}threeDemo/girl/elf.dae`,
+  function (collada) {
+    model = collada.scene;
+    model.scale.set(0.4, 0.4, 0.4);
+    model.position.x = 2;
+    model.position.y = -1;
+  }
+);
 const { nodes } = await useGLTF(
   "https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf",
   { draco: true }
