@@ -174,7 +174,7 @@ const styleRouter = {
   meta: {
     title: "样式",
     icon: "ri:quill-pen-ai-line",
-    rank: 30
+    rank: 40
   },
   children: [
     {
@@ -241,7 +241,7 @@ const threeRouter = {
   meta: {
     title: "三维",
     icon: "ri:exchange-2-line",
-    rank: 40
+    rank: 50
   },
   children: [
     {
@@ -311,6 +311,25 @@ const threeRouter = {
   ]
 };
 
+const AIRouter = {
+  path: "/ai",
+  meta: {
+    title: "AI",
+    icon: "ri:ai-generate-2",
+    rank: 60
+  },
+  children: [
+    {
+      path: "/ai/chat/index",
+      name: "chatPage",
+      meta: {
+        title: "chat",
+        roles: ["admin", "common"]
+      }
+    }
+  ]
+};
+
 export default defineFakeRoute([
   {
     url: "/get-async-routes",
@@ -323,7 +342,8 @@ export default defineFakeRoute([
           elementUIRouter,
           canvasRouter,
           styleRouter,
-          threeRouter
+          threeRouter,
+          AIRouter
         ]
       };
     }
