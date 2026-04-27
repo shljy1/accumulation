@@ -211,6 +211,8 @@ const transitionMain = defineComponent({
   margin: 24px;
 }
 .grow {
+  flex: 1;
+  min-height: 0;
   overflow-x: auto;
 }
 </style>

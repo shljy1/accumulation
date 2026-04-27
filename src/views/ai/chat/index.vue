@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full bg-[var(--el-bg-color-page)]">
+  <div class="flex flex-col h-full bg-[var(--el-bg-color-page)] !my-0">
     <!-- 头部 -->
     <div
       class="flex-bc px-6 py-4 border-b border-[var(--el-border-color-light)]"
@@ -24,7 +24,10 @@
     </div>
 
     <!-- 消息列表 -->
-    <div ref="messageContainer" class="flex-1 overflow-y-auto p-6 space-y-6">
+    <div
+      ref="messageContainer"
+      class="flex-1 overflow-y-auto p-6 space-y-6 mb-4 max-h-[60vh]"
+    >
       <div
         v-if="messages.length === 0"
         class="flex flex-col items-center justify-center h-full text-[var(--el-text-color-secondary)]"
@@ -85,7 +88,10 @@
       </div>
 
       <!-- 加载中 -->
-      <div v-if="loading" class="flex gap-4">
+      <div
+        v-if="loading && messages[messages.length - 1]?.role !== 'assistant'"
+        class="flex gap-4"
+      >
         <div
           class="w-9 h-9 rounded-full bg-[var(--el-color-success)] flex-c shrink-0"
         >
@@ -164,6 +170,16 @@ const inputMessage = ref("");
 const loading = ref(false);
 const messageContainer = ref<HTMLDivElement>();
 
+// 流式输出状态
+let typeTimer: ReturnType<typeof setInterval> | null = null;
+const streamState = ref({
+  rawThinking: "",
+  rawContent: "",
+  displayThinking: "",
+  displayContent: "",
+  msgIndex: -1
+});
+
 // 格式化时间
 function formatTime(timestamp: number): string {
   const date = new Date(timestamp);
@@ -191,6 +207,48 @@ function clearMessages() {
   messages.value = [];
 }
 
+// 启动打字机效果
+function startTypewriter(index: number) {
+  streamState.value.msgIndex = index;
+  if (typeTimer) return;
+  typeTimer = setInterval(() => {
+    const state = streamState.value;
+    // 优先显示 thinking
+    if (state.displayThinking.length < state.rawThinking.length) {
+      state.displayThinking += state.rawThinking[state.displayThinking.length];
+      messages.value[index].thinking = state.displayThinking;
+      scrollToBottom();
+      return;
+    }
+    // 再显示 content
+    if (state.displayContent.length < state.rawContent.length) {
+      state.displayContent += state.rawContent[state.displayContent.length];
+      messages.value[index].content = state.displayContent;
+      scrollToBottom();
+    }
+  }, 25);
+}
+
+// 停止打字机效果
+function stopTypewriter() {
+  if (typeTimer) {
+    clearInterval(typeTimer);
+    typeTimer = null;
+  }
+  const state = streamState.value;
+  if (state.msgIndex >= 0) {
+    messages.value[state.msgIndex].thinking = state.rawThinking;
+    messages.value[state.msgIndex].content = state.rawContent;
+  }
+  streamState.value = {
+    rawThinking: "",
+    rawContent: "",
+    displayThinking: "",
+    displayContent: "",
+    msgIndex: -1
+  };
+}
+
 // 发送消息
 async function sendMessage() {
   const content = inputMessage.value.trim();
@@ -206,6 +264,8 @@ async function sendMessage() {
   scrollToBottom();
 
   loading.value = true;
+  let assistantIndex = -1;
+  let hasReceivedChunk = false;
 
   try {
     const response = await fetch("https://aihubmix.com/v1/chat/completions", {
@@ -220,6 +280,7 @@ async function sendMessage() {
           role: msg.role,
           content: msg.content
         })),
+        stream: true,
         thinking: {
           type: "enabled"
         },
@@ -232,34 +293,115 @@ async function sendMessage() {
       throw new Error(`请求失败: ${response.status}`);
     }
 
-    const data = await response.json();
-    const assistantMessage = data.choices?.[0]?.message;
+    if (!response.body) {
+      throw new Error("响应体为空");
+    }
 
-    if (assistantMessage) {
-      messages.value.push({
-        role: "assistant",
-        content: assistantMessage.content || "",
-        thinking: assistantMessage.reasoning_content || "",
-        time: Date.now()
-      });
-    } else {
-      throw new Error("响应格式异常");
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let done = false;
+
+    while (!done) {
+      const { value, done: readerDone } = await reader.read();
+      done = readerDone;
+      if (value) {
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (line.trim() === "" || !line.startsWith("data: ")) continue;
+          const data = line.slice(6);
+          if (data === "[DONE]") {
+            done = true;
+            break;
+          }
+          try {
+            const json = JSON.parse(data);
+            const delta = json.choices?.[0]?.delta;
+            if (delta) {
+              if (!hasReceivedChunk) {
+                hasReceivedChunk = true;
+                assistantIndex = messages.value.length;
+                messages.value.push({
+                  role: "assistant",
+                  content: "",
+                  thinking: "",
+                  time: Date.now()
+                });
+                startTypewriter(assistantIndex);
+              }
+              if (delta.reasoning_content) {
+                streamState.value.rawThinking += delta.reasoning_content;
+              }
+              if (delta.content) {
+                streamState.value.rawContent += delta.content;
+              }
+            }
+          } catch (e) {
+            // 忽略解析错误
+          }
+        }
+      }
+    }
+
+    // 处理剩余 buffer
+    if (buffer.trim()) {
+      const lines = buffer.split("\n");
+      for (const line of lines) {
+        if (line.trim() === "" || !line.startsWith("data: ")) continue;
+        const data = line.slice(6);
+        if (data === "[DONE]") continue;
+        try {
+          const json = JSON.parse(data);
+          const delta = json.choices?.[0]?.delta;
+          if (delta) {
+            if (!hasReceivedChunk) {
+              hasReceivedChunk = true;
+              assistantIndex = messages.value.length;
+              messages.value.push({
+                role: "assistant",
+                content: "",
+                thinking: "",
+                time: Date.now()
+              });
+              startTypewriter(assistantIndex);
+            }
+            if (delta.reasoning_content) {
+              streamState.value.rawThinking += delta.reasoning_content;
+            }
+            if (delta.content) {
+              streamState.value.rawContent += delta.content;
+            }
+          }
+        } catch (e) {
+          // 忽略
+        }
+      }
     }
   } catch (error) {
     ElMessage.error(error instanceof Error ? error.message : "请求发生错误");
-    messages.value.push({
-      role: "assistant",
-      content: "抱歉，请求发生错误，请稍后重试。",
-      time: Date.now()
-    });
+    if (assistantIndex === -1) {
+      messages.value.push({
+        role: "assistant",
+        content: "抱歉，请求发生错误，请稍后重试。",
+        time: Date.now()
+      });
+    } else {
+      messages.value[assistantIndex].content =
+        "抱歉，请求发生错误，请稍后重试。";
+    }
   } finally {
+    if (assistantIndex !== -1) {
+      stopTypewriter();
+    }
     loading.value = false;
     scrollToBottom();
   }
 }
 
 onMounted(() => {
-  // 页面加载后聚焦输入框
   const textarea = document.querySelector(
     ".chat-input textarea"
   ) as HTMLTextAreaElement;
@@ -272,7 +414,6 @@ defineOptions({
 </script>
 
 <style lang="scss" scoped>
-/* 自定义滚动条 */
 .overflow-y-auto {
   &::-webkit-scrollbar {
     width: 6px;
