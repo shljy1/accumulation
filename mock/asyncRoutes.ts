@@ -71,10 +71,18 @@ const echartsRouter = {
       }
     },
     {
-      path: "/echarts/gauge/index",
-      name: "GaugePage",
+      path: "/echarts/pictorial1/index",
+      name: "PictorialPage1",
       meta: {
-        title: "仪表盘",
+        title: "象形柱图1",
+        roles: ["admin", "common"]
+      }
+    },
+    {
+      path: "/echarts/pie/index",
+      name: "PiePage",
+      meta: {
+        title: "3D饼图",
         roles: ["admin", "common"]
       }
     }
