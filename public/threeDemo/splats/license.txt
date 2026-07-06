@@ -1,0 +1,6 @@
+Title: tiny_kurisu_figurine
+Author: Mykhailo Moroz (https://superspl.at/user?id=misha_m)
+Source: https://superspl.at/scene/a7df3108
+License: CC Attribution (Creative Commons Attribution)
+License URL: http://creativecommons.org/licenses/by/4.0/
+Requirements: Author must be credited. Commercial use is allowed.

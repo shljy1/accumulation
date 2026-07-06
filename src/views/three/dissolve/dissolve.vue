@@ -3,19 +3,17 @@ import * as THREE from "three";
 import { onUnmounted } from "vue";
 import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import diffuseImage from "@/assets/welcome/sakura.jpg";
+import _dissolveTex from "@/assets/img/dissolveTex.png";
+import _dissolveRamp from "@/assets/img/dissolveRamp.png";
 let scene;
 scene = new THREE.Scene();
 const textureLoader = new THREE.TextureLoader();
 
 /* Tex 决定从哪个位置开始溶解 */
-const dissolveTex = textureLoader.load(
-  `https://file.threehub.cn/` + "images/dissolve/dissolveTex.png"
-);
+const dissolveTex = textureLoader.load(_dissolveTex);
 dissolveTex.colorSpace = THREE.SRGBColorSpace;
 /* Ramp 决定溶解时的颜色效果 */
-const dissolveRampTex = textureLoader.load(
-  `https://file.threehub.cn/` + "images/dissolve/dissolveRamp.png"
-);
+const dissolveRampTex = textureLoader.load(_dissolveRamp);
 dissolveRampTex.colorSpace = THREE.SRGBColorSpace;
 const diffuseTex = textureLoader.load(diffuseImage);
 diffuseTex.colorSpace = THREE.SRGBColorSpace;

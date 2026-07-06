@@ -315,6 +315,14 @@ const threeRouter = {
         title: "溶解",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/three/gaussian/index",
+      name: "gaussianPage",
+      meta: {
+        title: "3D高斯",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
