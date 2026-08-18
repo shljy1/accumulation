@@ -1,64 +1,65 @@
-<template class="relative">
-  <div id="myPictorial1" class="w-[600px] h-[800px] box-border bg-[#092254]" />
-
-  <svg
-    class="winding-road"
-    viewBox="50 -20 300 350"
-    preserveAspectRatio="xMidYMid meet"
-  >
-    <defs>
-      <linearGradient id="roadGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-        <stop offset="0%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="5%" stop-color="rgba(46, 172, 255, 0.50)" />
-        <stop offset="10%" stop-color="rgba(46, 172, 255, 0.50)" />
-        <stop offset="15%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="18%" stop-color="rgba(46, 172, 255, 0.50)" />
-        <stop offset="23%" stop-color="rgba(46, 172, 255, 0.50)" />
-        <stop offset="30%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="32%" stop-color="rgba(46, 172, 255, 0.50)" />
-        <stop offset="38%" stop-color="rgba(46, 172, 255, 0.50)" />
-        <stop offset="43%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="47%" stop-color="rgba(46, 255, 224, 0.50)" />
-        <stop offset="52%" stop-color="rgba(46, 255, 224, 0.50)" />
-        <stop offset="58%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="63%" stop-color="rgba(46, 255, 224, 0.50)" />
-        <stop offset="68%" stop-color="rgba(46, 255, 224, 0.50)" />
-        <stop offset="72%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="77%" stop-color="rgba(46, 255, 224, 0.50)" />
-        <stop offset="82%" stop-color="rgba(46, 255, 224, 0.50)" />
-        <stop offset="88%" stop-color="rgba(0, 0, 0, 0)" />
-        <stop offset="90%" stop-color="rgba(46, 255, 126, 0.50)" />
-        <stop offset="95%" stop-color="rgba(46, 255, 126, 0.50)" />
-        <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
-      </linearGradient>
-    </defs>
-
-    <path
-      id="road1"
-      :d="roadPath"
-      fill="none"
-      stroke="url(#roadGrad)"
-      stroke-width="1"
-    />
-    <path
-      :d="roadPath"
-      fill="none"
-      stroke="url(#roadGrad)"
-      stroke-width="1.5"
-      stroke-opacity="1"
-      stroke-linecap="round"
-      stroke-dasharray="10 36"
+<template>
+  <div class="w-[600px] h-[800px] box-border bg-[#092254] relative">
+    <div id="myPictorial1" class="size-full" />
+    <svg
+      class="winding-road"
+      viewBox="50 -20 300 350"
+      preserveAspectRatio="xMidYMid meet"
     >
-      <animate
-        attributeName="stroke-dashoffset"
-        from="0"
-        to="-138"
-        dur="3s"
-        repeatCount="indefinite"
-        :begin="0"
+      <defs>
+        <linearGradient id="roadGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="5%" stop-color="rgba(46, 172, 255, 0.50)" />
+          <stop offset="10%" stop-color="rgba(46, 172, 255, 0.50)" />
+          <stop offset="15%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="18%" stop-color="rgba(46, 172, 255, 0.50)" />
+          <stop offset="23%" stop-color="rgba(46, 172, 255, 0.50)" />
+          <stop offset="30%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="32%" stop-color="rgba(46, 172, 255, 0.50)" />
+          <stop offset="38%" stop-color="rgba(46, 172, 255, 0.50)" />
+          <stop offset="43%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="47%" stop-color="rgba(46, 255, 224, 0.50)" />
+          <stop offset="52%" stop-color="rgba(46, 255, 224, 0.50)" />
+          <stop offset="58%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="63%" stop-color="rgba(46, 255, 224, 0.50)" />
+          <stop offset="68%" stop-color="rgba(46, 255, 224, 0.50)" />
+          <stop offset="72%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="77%" stop-color="rgba(46, 255, 224, 0.50)" />
+          <stop offset="82%" stop-color="rgba(46, 255, 224, 0.50)" />
+          <stop offset="88%" stop-color="rgba(0, 0, 0, 0)" />
+          <stop offset="90%" stop-color="rgba(46, 255, 126, 0.50)" />
+          <stop offset="95%" stop-color="rgba(46, 255, 126, 0.50)" />
+          <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+        </linearGradient>
+      </defs>
+
+      <path
+        id="road1"
+        :d="roadPath"
+        fill="none"
+        stroke="url(#roadGrad)"
+        stroke-width="1"
       />
-    </path>
-  </svg>
+      <path
+        :d="roadPath"
+        fill="none"
+        stroke="url(#roadGrad)"
+        stroke-width="1.5"
+        stroke-opacity="1"
+        stroke-linecap="round"
+        stroke-dasharray="10 36"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="-138"
+          dur="3s"
+          repeatCount="indefinite"
+          :begin="0"
+        />
+      </path>
+    </svg>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -491,11 +492,10 @@ const debouncedChartResize = debounce(chartResize, 200, false);
 .winding-road {
   position: absolute;
   bottom: 5%;
-  left: 45%;
-  transform: translateX(-73%);
+  left: 0;
+  transform: translateX(-5%);
   width: 100%;
   height: 100%;
-  z-index: 0;
   pointer-events: none;
 }
 </style>

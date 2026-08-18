@@ -1,5 +1,5 @@
 <template>
-  <div id="myPictorial" class="w-[800px] h-[500px] box-border" />
+  <div id="myGauge" class="w-[800px] h-[500px] box-border" />
 </template>
 
 <script lang="ts" setup>
@@ -7,7 +7,7 @@ import * as echarts from "echarts";
 import { onMounted, onUnmounted, watch } from "vue";
 import { debounce } from "../../../store/utils";
 defineOptions({
-  name: "PictorialPage"
+  name: "GaugePage"
 });
 onMounted(() => {
   initBar();
@@ -20,7 +20,7 @@ onUnmounted(() => {
 let myChartBar;
 
 const initBar = () => {
-  let chartDom = document.getElementById("myPictorial");
+  let chartDom = document.getElementById("myGauge");
   myChartBar = echarts.getInstanceByDom(chartDom!);
   if (myChartBar == null) {
     myChartBar = echarts.init(chartDom);
@@ -55,12 +55,6 @@ const initBar = () => {
       data: [
         {
           name: "animals",
-          itemStyle: {
-            color: "#4DB3FE"
-          }
-        },
-        {
-          name: "animals1",
           itemStyle: {
             color: "#4DB3FE"
           }
@@ -138,7 +132,6 @@ const initBar = () => {
       {
         type: "bar",
         name: "animals",
-        stack: "aa",
         barWidth: 14,
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -160,21 +153,19 @@ const initBar = () => {
           show: false
         },
         z: 12,
-        symbol: "diamond",
         symbolPosition: "start",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, "50%"],
+        symbolOffset: [0, 5],
         data: [4, 5, 6, 7]
       },
       {
         name: "animals",
         type: "pictorialBar",
-        symbol: "diamond",
         symbolPosition: "end",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, "-50%"],
+        symbolOffset: [0, -5],
         xAxisIndex: 2,
         tooltip: {
           show: false
@@ -187,104 +178,54 @@ const initBar = () => {
       },
       {
         type: "bar",
-        name: "animals1",
-        stack: "aa",
+        name: "Fruits",
         barWidth: 14,
+        xAxisIndex: 0,
+        barGap: "100%",
         itemStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: "#40ADFF" },
-            { offset: 1, color: "rgba(189, 240, 255, 0.3)" }
+            { offset: 0, color: "#1FE0E0" },
+            { offset: 1, color: "rgba(189, 255, 251, 0.3)" }
           ])
         },
-        data: [8, 8, 8, 8],
-        xAxisIndex: 0
+        data: [10, 11, 12, 13]
       },
       {
-        name: "animals1",
+        name: "Fruits",
         type: "pictorialBar",
+        barWidth: 14,
+        symbolSize: [14, 7],
+        symbolOffset: [0, 5],
+        barGap: "100%",
+        tooltip: {
+          show: false
+        },
         xAxisIndex: 1,
-        itemStyle: {
-          color: "#BDF0FF"
-        },
-        tooltip: {
-          show: false
-        },
         z: 12,
-        symbol: "diamond",
+        itemStyle: {
+          color: "#AAFFF9"
+        },
         symbolPosition: "start",
-        barWidth: 14,
-        symbolSize: [14, 7],
-        symbolOffset: [0, "50%"],
-        data: [8, 8, 8, 8]
+        data: [10, 11, 12, 13]
       },
       {
-        name: "animals1",
+        name: "Fruits",
         type: "pictorialBar",
-        symbol: "diamond",
-        symbolPosition: "end",
         barWidth: 14,
         symbolSize: [14, 7],
-        symbolOffset: [0, "-50%"],
-        xAxisIndex: 2,
+        symbolOffset: [0, -5],
+        symbolPosition: "end",
+        barGap: "100%",
         tooltip: {
           show: false
         },
         z: 12,
+        xAxisIndex: 2,
         itemStyle: {
-          color: "#9BD4FF"
+          color: "#AAFFF9"
         },
-        data: [8, 8, 8, 8]
+        data: [10, 11, 12, 13]
       }
-      // {
-      //   type: "bar",
-      //   name: "Fruits",
-      //   barWidth: 14,
-      //   xAxisIndex: 0,
-      //   barGap: "100%",
-      //   itemStyle: {
-      //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-      //       { offset: 0, color: "#1FE0E0" },
-      //       { offset: 1, color: "rgba(189, 255, 251, 0.3)" }
-      //     ])
-      //   },
-      //   data: [10, 11, 12, 13]
-      // },
-      // {
-      //   name: "Fruits",
-      //   type: "pictorialBar",
-      //   barWidth: 14,
-      //   symbolSize: [14, 7],
-      //   symbolOffset: [0, "50%"],
-      //   barGap: "100%",
-      //   tooltip: {
-      //     show: false
-      //   },
-      //   xAxisIndex: 1,
-      //   z: 12,
-      //   itemStyle: {
-      //     color: "#AAFFF9"
-      //   },
-      //   symbolPosition: "start",
-      //   data: [10, 11, 12, 13]
-      // },
-      // {
-      //   name: "Fruits",
-      //   type: "pictorialBar",
-      //   barWidth: 14,
-      //   symbolSize: [14, 7],
-      //   symbolOffset: [0, "-50%"],
-      //   symbolPosition: "end",
-      //   barGap: "100%",
-      //   tooltip: {
-      //     show: false
-      //   },
-      //   z: 12,
-      //   xAxisIndex: 2,
-      //   itemStyle: {
-      //     color: "#AAFFF9"
-      //   },
-      //   data: [10, 11, 12, 13]
-      // }
     ]
   };
 
