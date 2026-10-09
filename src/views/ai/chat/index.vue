@@ -268,26 +268,29 @@ async function sendMessage() {
   let hasReceivedChunk = false;
 
   try {
-    const response = await fetch("https://aihubmix.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_AI_APIKEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: import.meta.env.VITE_AI_MODEL,
-        messages: messages.value.map(msg => ({
-          role: msg.role,
-          content: msg.content
-        })),
-        stream: true,
-        thinking: {
-          type: "enabled"
+    const response = await fetch(
+      "https://api.inferera.com/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_AI_APIKEY}`,
+          "Content-Type": "application/json"
         },
-        max_tokens: 65536,
-        temperature: 1.0
-      })
-    });
+        body: JSON.stringify({
+          model: import.meta.env.VITE_AI_MODEL,
+          messages: messages.value.map(msg => ({
+            role: msg.role,
+            content: msg.content
+          })),
+          stream: true,
+          thinking: {
+            type: "enabled"
+          },
+          max_tokens: 65536,
+          temperature: 1.0
+        })
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`请求失败: ${response.status}`);

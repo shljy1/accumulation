@@ -323,6 +323,14 @@ const threeRouter = {
         title: "3D高斯",
         roles: ["admin", "common"]
       }
+    },
+    {
+      path: "/three/krPano/index",
+      name: "krPanoPage",
+      meta: {
+        title: "3D全景",
+        roles: ["admin", "common"]
+      }
     }
   ]
 };
