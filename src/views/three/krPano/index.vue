@@ -18,8 +18,7 @@ onMounted(() => {
       target: "embedpano",
       id: "embedpano1",
       bgcolor: "transparent",
-      // xml 已放到 public/krpano 下，xml 内部的相对路径会基于该目录解析
-      xml: "/krpano/threejs_thirdpersoncontrols.xml",
+      xml: `${import.meta.env.BASE_URL}krpano/threejs_thirdpersoncontrols.xml`,
       sameorigin: false,
       onready: () => {}
     });
@@ -30,7 +29,7 @@ onMounted(() => {
 
 // 路由离开时销毁全景实例，释放 WebGL 资源
 onUnmounted(() => {
-  window.removepano?.("embedpano");
+  window.removepano?.("embedpano1");
 });
 
 defineOptions({
